@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Barber Shop Valencia | Cortes y barba en El Carmen y La Petxina</title>
+  <meta name="description" content="Barbería en Valencia con dos tiendas: El Carmen y La Petxina. Reserva tu corte, barba o tratamiento.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="nav">
+    <a class="nav__brand" href="index.html">Barber Shop Valencia<span>Valencia</span></a>
+    <button class="nav__toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Abrir menú"><span></span></button>
+    <nav class="nav__links" data-nav>
+      <a href="index.html" class="is-active">Inicio</a>
+      <div class="nav__drop">
+        <a href="index.html#tiendas" data-drop-toggle aria-expanded="false">Nuestras tiendas</a>
+        <ul class="dropdown">
+          <li><a href="el-carmen.html">El Carmen</a></li>
+          <li><a href="la-petxina.html">La Petxina</a></li>
+        </ul>
+      </div>
+      <a href="servicios.html">Servicios</a>
+      <a href="contacto.html">Contacto</a>
+      <a class="btn btn--ghost" href="https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia" target="_blank" rel="noopener">Booksy</a><a class="btn btn--primary" href="https://api.whatsapp.com/send/?phone=34677142958&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+  </header>
+  <section class="hero">
+    <div class="hero__media">
+      <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1920&q=80&auto=format&fit=crop" alt="Interior de la barbería Barber Shop Valencia" width="1920" height="1280" fetchpriority="high">
+    </div>
+    <div class="container hero__content">
+      <h1 class="hero__brand">Barber Shop<br>Valencia</h1>
+      <p class="hero__headline">Cortes precisos. Estilo actual.</p>
+      <p class="hero__sub">Dos tiendas en Valencia, dirigidas por Miguel. Un corte limpio, una barba definida y un equipo que cuida el detalle.</p>
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="https://api.whatsapp.com/send/?phone=34677142958&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">Reservar por WhatsApp</a>
+        <a class="btn btn--ghost" href="https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia" target="_blank" rel="noopener">Reservar por Booksy</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="sobre">
+    <div class="container split">
+      <div class="split__media">
+        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1200&q=80&auto=format&fit=crop" alt="Barbero realizando un corte en Barber Shop Valencia" width="1200" height="1500">
+      </div>
+      <div>
+        <p class="section__label">El dueño</p>
+        <h2 class="section__title">La historia de Miguel</h2>
+        <p class="muted">Miguel es el dueño de Barber Shop Valencia. Emprendedor boliviano, llegó a España y durante un tiempo trabajó en la construcción. Hace siete años empezó en el ramo de la barbería.</p>
+        <p class="muted">Hoy dirige dos tiendas en Valencia: La Petxina, en San Ignacio de Loyola, y El Carmen, en la calle Baja. El mismo criterio en las dos sillas: asesoramiento, acabado nítido y un corte que se nota.</p>
+        <p class="muted">Su sueño es abrir más barberías por España y extender la marca Barber Shop Valencia por todo el país.</p>
+        <p class="owner">Miguel<span>Dueño</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="servicios">
+    <div class="container">
+      <p class="section__label">Servicios</p>
+      <h2 class="section__title">Conoce nuestros servicios</h2>
+      <p class="section__lead">Una selección de lo más pedido. La carta completa, con precio por tienda, está en Servicios.</p>
+      <ul class="services">
+        <li class="service">
+          <div>
+            <p class="service__name">Corte clásico / degradado</p>
+            <p class="service__meta">La Petxina · 30 min</p>
+          </div>
+          <p class="service__price">16 €</p>
+          <p class="service__desc">El corte de casa en La Petxina, con lavado opcional.</p>
+          <span class="service__actions"><a class="btn btn--ghost btn--sm" href="https://api.whatsapp.com/send/?phone=34677142958&text=Hola%2C%20quiero%20reservar%20Corte%20cl%C3%A1sico%20/%20degradado%20en%20Barber%20Shop%20Valencia%20La%20Petxina.&type=phone_number&app_absent=0" target="_blank" rel="noopener">WhatsApp</a><a class="btn btn--primary btn--sm" href="https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia" target="_blank" rel="noopener">Reserva ahora</a></span>
+        </li>
+        <li class="service">
+          <div>
+            <p class="service__name">Corte skin fade</p>
+            <p class="service__meta">El Carmen · 30 min</p>
+          </div>
+          <p class="service__price">17 €</p>
+          <p class="service__desc">Degradado al cero, el más pedido en El Carmen.</p>
+          <span class="service__actions"><a class="btn btn--ghost btn--sm" href="https://api.whatsapp.com/send/?phone=34677142958&text=Hola%2C%20quiero%20reservar%20Corte%20skin%20fade%20en%20Barber%20Shop%20Valencia%20El%20Carmen.&type=phone_number&app_absent=0" target="_blank" rel="noopener">WhatsApp</a><a class="btn btn--primary btn--sm" href="https://booksy.com/es-es/132769_barber-shop-valencia-el-carmen_barberia_58087_valencia" target="_blank" rel="noopener">Reserva ahora</a></span>
+        </li>
+        <li class="service">
+          <div>
+            <p class="service__name">Corte + arreglo de barba</p>
+            <p class="service__meta">40–50 min</p>
+          </div>
+          <p class="service__price">25 €</p>
+          <p class="service__desc">Pelo y barba en la misma cita, en cualquiera de las dos tiendas.</p>
+          <span class="service__actions"><a class="btn btn--ghost btn--sm" href="https://api.whatsapp.com/send/?phone=34677142958&text=Hola%2C%20quiero%20reservar%20Corte%20%2B%20arreglo%20de%20barba%20en%20Barber%20Shop%20Valencia%20La%20Petxina.&type=phone_number&app_absent=0" target="_blank" rel="noopener">WhatsApp</a><a class="btn btn--primary btn--sm" href="https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia" target="_blank" rel="noopener">Reserva ahora</a></span>
+        </li>
+        <li class="service">
+          <div>
+            <p class="service__name">Barba VIP</p>
+            <p class="service__meta">30 min</p>
+          </div>
+          <p class="service__price">15 €</p>
+          <p class="service__desc">Perfilado con más tiempo y un acabado más cuidado.</p>
+          <span class="service__actions"><a class="btn btn--ghost btn--sm" href="https://api.whatsapp.com/send/?phone=34677142958&text=Hola%2C%20quiero%20reservar%20Barba%20VIP%20en%20Barber%20Shop%20Valencia%20El%20Carmen.&type=phone_number&app_absent=0" target="_blank" rel="noopener">WhatsApp</a><a class="btn btn--primary btn--sm" href="https://booksy.com/es-es/132769_barber-shop-valencia-el-carmen_barberia_58087_valencia" target="_blank" rel="noopener">Reserva ahora</a></span>
+        </li>
+        <li class="service">
+          <div>
+            <p class="service__name">Cejas</p>
+            <p class="service__meta">10–15 min</p>
+          </div>
+          <p class="service__price">4 €</p>
+          <p class="service__desc">Diseño a cuchilla o navaja para cerrar el look.</p>
+          <span class="service__actions"><a class="btn btn--ghost btn--sm" href="https://api.whatsapp.com/send/?phone=34677142958&text=Hola%2C%20quiero%20reservar%20Cejas%20en%20Barber%20Shop%20Valencia%20La%20Petxina.&type=phone_number&app_absent=0" target="_blank" rel="noopener">WhatsApp</a><a class="btn btn--primary btn--sm" href="https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia" target="_blank" rel="noopener">Reserva ahora</a></span>
+        </li>
+        <li class="service">
+          <div>
+            <p class="service__name">Limpieza facial de arcilla</p>
+            <p class="service__meta">La Petxina · 20 min</p>
+          </div>
+          <p class="service__price">15 €</p>
+          <p class="service__desc">Mascarilla de arcilla en La Petxina.</p>
+          <span class="service__actions"><a class="btn btn--ghost btn--sm" href="https://api.whatsapp.com/send/?phone=34677142958&text=Hola%2C%20quiero%20reservar%20Limpieza%20facial%20de%20arcilla%20en%20Barber%20Shop%20Valencia%20La%20Petxina.&type=phone_number&app_absent=0" target="_blank" rel="noopener">WhatsApp</a><a class="btn btn--primary btn--sm" href="https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia" target="_blank" rel="noopener">Reserva ahora</a></span>
+        </li>
+      </ul>
+      <p style="margin-top:1.5rem"><a class="btn btn--ghost" href="servicios.html">Ver toda la carta</a></p>
+    </div>
+  </section>
+
+  <section class="section" id="horario">
+    <div class="container">
+      <p class="section__label">Horario</p>
+      <h2 class="section__title">Cuándo estamos</h2>
+      <p class="section__lead">Mismo horario en El Carmen y en La Petxina. Los festivos pueden variar.</p>
+      <div class="hours-grid">
+        <article class="card"><span>Lunes a viernes</span><h3>10:00 – 20:00</h3></article>
+        <article class="card"><span>Sábado</span><h3>10:00 – 18:00</h3></article>
+        <article class="card"><span>Domingo</span><h3>11:00 – 17:00</h3></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="tiendas">
+    <div class="container">
+      <p class="section__label">Direcciones</p>
+      <h2 class="section__title">Nuestras tiendas</h2>
+      <p class="section__lead">Elige el local. Las fotos abren la página de cada barbería.</p>
+      <div class="locations">
+        <article class="card">
+          <a href="la-petxina.html">
+            <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=1400&q=80&auto=format&fit=crop" alt="Barber Shop Valencia La Petxina" width="800" height="520" style="width:100%;height:220px;object-fit:cover;margin-bottom:1rem">
+          </a>
+          <h3>La Petxina</h3>
+          <p>Barber Shop Valencia<br><a href="https://www.google.com/maps/search/?api=1&query=C%2F+San+Ignacio+de+Loyola+7%2C+46008+Valencia%2C+Espa%C3%B1a" target="_blank" rel="noopener">C/ San Ignacio de Loyola 7, 46008 Valencia, España</a></p>
+          <p style="margin-top:1rem"><a class="btn btn--ghost btn--sm" href="la-petxina.html">Ver la tienda</a></p>
+        </article>
+        <article class="card">
+          <a href="el-carmen.html">
+            <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1920&q=80&auto=format&fit=crop" alt="Barber Shop Valencia El Carmen" width="800" height="520" style="width:100%;height:220px;object-fit:cover;margin-bottom:1rem">
+          </a>
+          <h3>El Carmen</h3>
+          <p>Barber Shop Valencia El Carmen<br><a href="https://www.google.com/maps/search/?api=1&query=C%2F+Baja+50%2C+46008+Valencia%2C+Espa%C3%B1a" target="_blank" rel="noopener">C/ Baja, 50, 46008 Valencia, España</a></p>
+          <p style="margin-top:1rem"><a class="btn btn--ghost btn--sm" href="el-carmen.html">Ver la tienda</a></p>
+        </article>
+      </div>
+      <p class="section__lead" style="margin-top:1.75rem;margin-bottom:0">Escríbenos a <a href="mailto:info@barbershopvalencia.com">info@barbershopvalencia.com</a> o por WhatsApp.</p>
+    </div>
+  </section>
+
+  <section class="section" id="partners">
+    <div class="container">
+      <p class="section__label">Partners</p>
+      <h2 class="section__title">Marcas con las que trabajamos</h2>
+      <p class="section__lead">Productos de barbería que usamos en la silla: pomadas, navajas, máquinas y cuidado de piel.</p>
+    </div>
+    <div class="partners" aria-label="Carrusel de marcas">
+      <div class="partners__track">
+        <span class="brand">Proraso</span><span class="brand">Wahl</span><span class="brand">BaBylissPRO</span><span class="brand">Pacinos</span><span class="brand">Derby</span><span class="brand">Portobello</span><span class="brand">Proraso</span><span class="brand">Wahl</span><span class="brand">BaBylissPRO</span><span class="brand">Pacinos</span><span class="brand">Derby</span><span class="brand">Portobello</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="cta__bg">
+      <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1600&q=80&auto=format&fit=crop" alt="Detalle de un corte en barbería" width="1600" height="900" loading="lazy">
+    </div>
+    <div class="container">
+      <h2>Reserva tu próxima cita</h2>
+      <p>WhatsApp, Booksy o un mensaje a info@barbershopvalencia.com. Te esperamos.</p>
+      <div class="cta__actions">
+        <a class="btn btn--primary" href="https://api.whatsapp.com/send/?phone=34677142958&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">Reservar por WhatsApp</a>
+        <a class="btn btn--light" href="https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia" target="_blank" rel="noopener">Reservar por Booksy</a>
+      </div>
+    </div>
+  </section>
+<footer class="footer">
+    <div class="container footer__grid">
+      <div>
+        <h3>Barber Shop Valencia</h3>
+        <p>Dos barberías en Valencia. Cortes, barba y cuidado masculino con el sello de Miguel y su equipo.</p>
+        <div class="socials" aria-label="Redes sociales">
+        <a href="https://www.instagram.com/barbershopvalencia_/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm5 4.2A4.8 4.8 0 1 0 16.8 12 4.8 4.8 0 0 0 12 7.2zm6.3-.8a1.15 1.15 0 1 0 1.15 1.15A1.15 1.15 0 0 0 18.3 6.4zM12 9.1A2.9 2.9 0 1 1 9.1 12 2.9 2.9 0 0 1 12 9.1z"/></svg></a>
+        <a href="https://www.tiktok.com/search?q=Barber%20Shop%20Valencia" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.2 3h2.3a5.2 5.2 0 0 0 3.4 3.2v2.3a7.4 7.4 0 0 1-3.4-1.1v7.1a6 6 0 1 1-6-6c.3 0 .7 0 1 .1v2.5a3.5 3.5 0 1 0 2.5 3.4V3z"/></svg></a>
+        <a href="https://www.facebook.com/barbershop.valencia.9" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.2 8.5H17V5.4h-2.8c-2.3 0-4.1 1.8-4.1 4.1v2H8v3.1h2.1V21h3.2v-6.4h2.7l.4-3.1h-3.1v-1.6c0-.7.4-1.4 1.4-1.4z"/></svg></a>
+        <a href="https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia" target="_blank" rel="noopener" aria-label="Booksy"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2.8h2.1V5h5.8V2.8H17V5h1.6A2.4 2.4 0 0 1 21 7.4V19a2.4 2.4 0 0 1-2.4 2.4H5.4A2.4 2.4 0 0 1 3 19V7.4A2.4 2.4 0 0 1 5.4 5H7zm12 7.2H5v9h14z"/></svg></a>
+      </div>
+      </div>
+      <div>
+        <h3>La Petxina</h3>
+        <address>
+          <p><a href="https://www.google.com/maps/search/?api=1&query=C%2F+San+Ignacio+de+Loyola+7%2C+46008+Valencia%2C+Espa%C3%B1a" target="_blank" rel="noopener">C/ San Ignacio de Loyola 7<br>46008 Valencia, España</a></p>
+        </address>
+      </div>
+      <div>
+        <h3>El Carmen</h3>
+        <address>
+          <p><a href="https://www.google.com/maps/search/?api=1&query=C%2F+Baja+50%2C+46008+Valencia%2C+Espa%C3%B1a" target="_blank" rel="noopener">C/ Baja, 50<br>46008 Valencia, España</a></p>
+        </address>
+      </div>
+    </div>
+    <div class="container footer__base">
+      <p>© Barber Shop Valencia</p>
+      <p><a href="mailto:info@barbershopvalencia.com">info@barbershopvalencia.com</a></p>
+    </div>
+  </footer>
+  <a class="wa" href="https://api.whatsapp.com/send/?phone=34677142958&text&type=phone_number&app_absent=0" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 3.2A8.7 8.7 0 0 0 4.5 16.3L3.4 20.6l4.4-1.1a8.7 8.7 0 0 0 4.2 1.1h.1A8.7 8.7 0 0 0 12.04 3.2zm5 12.2c-.2.6-1.2 1.1-1.6 1.1-.4.1-.9.1-2.9-.6-2.4-1-4-3.4-4.1-3.6-.1-.2-1-1.3-1-2.5s.6-1.8.9-2 .5-.3.7-.3h.6c.2 0 .4 0 .6.5.2.6.7 1.9.8 2s0 .4-.1.5-.3.4-.4.6-.3.3-.1.7a7.4 7.4 0 0 0 1.4 1.7 6.4 6.4 0 0 0 2 1.1c.3.1.5 0 .7-.2s.8-.9 1-1.2.4-.3.6-.2 1.6.8 1.9 1 .4.4.3.7z"/></svg>
+  </a>
+  <script src="assets/site.js"></script>
+</body>
+</html>
