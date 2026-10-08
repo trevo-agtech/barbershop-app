@@ -105,7 +105,105 @@ def nav(lang: str, active: str = "blog") -> str:
 """
 
 
+BOOKSY_PETXINA = "https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia"
+WA_PETXINA_ES = "https://api.whatsapp.com/send/?phone=34677142958&text=Hola%2C%20quiero%20reservar%20el%209%20de%20octubre%20en%20Barber%20Shop%20Valencia%20La%20Petxina.&type=phone_number&app_absent=0"
+WA_PETXINA_EN = "https://api.whatsapp.com/send/?phone=34677142958&text=Hi%2C%20I%20want%20to%20book%20on%209%20October%20at%20Barber%20Shop%20Valencia%20La%20Petxina.&type=phone_number&app_absent=0"
+
 POSTS = [
+    {
+        "es_slug": "9-octubre-valencia-barberia-abierta-la-petxina.html",
+        "en_slug": "9-october-valencia-barbershop-open-la-petxina.html",
+        "date": "2026-10-08",
+        "date_label_es": "8 de octubre de 2026",
+        "date_label_en": "8 October 2026",
+        "image": "IMG_0842.jpg",
+        "image_alt_es": "Barber Shop Valencia lista para el 9 de octubre",
+        "image_alt_en": "Barber Shop Valencia ready for 9 October",
+        "title_es": "9 de octubre en Valencia: qué significa y barbería abierta en La Petxina",
+        "title_en": "9 October in Valencia: what it means and barbershop open in La Petxina",
+        "desc_es": "El 9 de octubre es el Día de la Comunitat Valenciana. Qué hacer en Valencia, cortes para celebrar y reserva en La Petxina (abierta). El Carmen cerrado.",
+        "desc_en": "9 October is Valencian Community Day. What to do in Valencia, celebration haircuts and booking at La Petxina (open). El Carmen closed.",
+        "excerpt_es": "Feriado del 9 d’octubre: La Petxina abierta para tu corte, El Carmen cerrado. Ideas para el día y looks para celebrar.",
+        "excerpt_en": "9 October holiday: La Petxina open for your cut, El Carmen closed. Day ideas and looks to celebrate.",
+        "cta_es": f"""
+        <h2>Reserva tu corte en La Petxina (9 de octubre)</h2>
+        <p><strong>La Petxina estará abierta</strong> este feriado. <strong>El Carmen permanecerá cerrado</strong>. Reserva tu hueco en C/ Juan Llorens 18.</p>
+        <div class="cta__actions cta__actions--stack">
+          <a class="btn btn--primary" href="{BOOKSY_PETXINA}" target="_blank" rel="noopener">Reservar en Booksy · La Petxina</a>
+          <a class="btn btn--ghost" href="{WA_PETXINA_ES}" target="_blank" rel="noopener">WhatsApp La Petxina</a>
+          <a class="btn btn--ghost" href="../la-petxina.html">Ver tienda La Petxina</a>
+        </div>
+        """,
+        "cta_en": f"""
+        <h2>Book your cut at La Petxina (9 October)</h2>
+        <p><strong>La Petxina will be open</strong> on this holiday. <strong>El Carmen will stay closed</strong>. Book your slot at C/ Juan Llorens 18.</p>
+        <div class="cta__actions cta__actions--stack">
+          <a class="btn btn--primary" href="{BOOKSY_PETXINA}" target="_blank" rel="noopener">Book on Booksy · La Petxina</a>
+          <a class="btn btn--ghost" href="{WA_PETXINA_EN}" target="_blank" rel="noopener">WhatsApp La Petxina</a>
+          <a class="btn btn--ghost" href="../la-petxina.html">View La Petxina shop</a>
+        </div>
+        """,
+        "body_es": f"""
+        <p class="blog-notice"><strong>Horario especial 9 de octubre:</strong> <a href="../la-petxina.html">La Petxina</a> (C/ Juan Llorens 18) <strong>abierta</strong>. <a href="../el-carmen.html">El Carmen</a> (C/ Baja 50) <strong>cerrada</strong>.</p>
+        <p>El <strong>9 de octubre</strong> es el <strong>Día de la Comunitat Valenciana</strong> (Nou d’Octubre). Conmemora la entrada del rey Jaume I en la ciudad de Valencia en 1238, un hito que marca el origen simbólico del pueblo valenciano. Es fiesta oficial en toda la Comunitat y uno de los días con más identidad en la ciudad.</p>
+        <h2>Qué significa el 9 de octubre en Valencia</h2>
+        <p>Más allá del día libre, el 9 d’octubre es memoria e identidad: procesión cívica con la Reial Senyera, ofrenda a Jaume I, himno, mascletà y, por la tarde, la entrada de Moros y Cristianos. También se celebra Sant Donís, con la tradición de regalar la <em>mocadorà</em> de mazapán. En 2026 la fiesta tiene un matiz especial por el 750 aniversario de la muerte de Jaume I.</p>
+        <h2>Qué hacer en Valencia el 9 de octubre</h2>
+        <ul>
+          <li><strong>Mañana en el centro:</strong> sigue la Procesión Cívica desde la plaza del Ayuntamiento hacia la Catedral y la ofrenda en la estatua de Jaume I (Parterre / plaza d’Alfons el Magnànim).</li>
+          <li><strong>Mascletà:</strong> al terminar la procesión suele dispararse en la plaza del Ayuntamiento: pólvora, ritmo y ambiente de fiesta.</li>
+          <li><strong>Tarde:</strong> Entrada de Moros y Cristianos por el centro (Glorieta, calle de la Pau, plaza del Ayuntamiento…).</li>
+          <li><strong>Sant Donís:</strong> regala o compra una mocadorà; es el detalle dulce del día en Valencia.</li>
+          <li><strong>Paseo y terraza:</strong> después de los actos, aprovecha el feriado para un vermut o comida en El Carmen, Ruzafa o cerca de La Petxina.</li>
+        </ul>
+        <h2>Cortes para celebrar el 9 d’octubre</h2>
+        <p>Un feriado así pide llegar impecable: fotos, familia, desfile y noche. En La Petxina te dejamos listo con looks que funcionan igual de bien en la mascletà que en la cena:</p>
+        <ul>
+          <li><strong>Fade limpio + barba perfilada:</strong> el combo más pedido para lucir fresco y definido.</li>
+          <li><strong>Crop texturizado:</strong> moderno, fácil de peinar y con movimiento para el día completo.</li>
+          <li><strong>Clásico con degradado:</strong> elegante si vas a actos institucionales o comida familiar.</li>
+          <li><strong>Corte + arreglo de barba:</strong> el upgrade rápido para celebrar con estilo valenciano.</li>
+        </ul>
+        <p>Consulta la <a href="../servicios.html">carta de servicios</a> y elige el tuyo. Los huecos del feriado vuelan: mejor reservar ya.</p>
+        <h2>Reserva en La Petxina (abierta el 9 de octubre)</h2>
+        <p>Este 9 de octubre <strong>solo abre La Petxina</strong>, en C/ Juan Llorens 18. El Carmen permanecerá cerrado.</p>
+        <p>
+          <a class="btn btn--primary" href="{BOOKSY_PETXINA}" target="_blank" rel="noopener">Reservar corte · La Petxina (Booksy)</a>
+          <a class="btn btn--ghost" href="{WA_PETXINA_ES}" target="_blank" rel="noopener">WhatsApp</a>
+        </p>
+        <p>Dirección: <a href="https://www.google.com/maps/search/?api=1&query=C%2F+Juan+Llorens+18%2C+46008+Valencia" target="_blank" rel="noopener">C/ Juan Llorens 18, 46008 Valencia</a>. Más info en la página de <a href="../la-petxina.html">La Petxina</a>.</p>
+        """,
+        "body_en": f"""
+        <p class="blog-notice"><strong>Special hours 9 October:</strong> <a href="../la-petxina.html">La Petxina</a> (C/ Juan Llorens 18) <strong>open</strong>. <a href="../el-carmen.html">El Carmen</a> (C/ Baja 50) <strong>closed</strong>.</p>
+        <p><strong>9 October</strong> is the <strong>Day of the Valencian Community</strong> (Nou d’Octubre). It marks King Jaume I’s entry into Valencia in 1238 — a founding moment for Valencian identity. It is an official public holiday across the Comunitat and one of the city’s most meaningful dates.</p>
+        <h2>What 9 October means in Valencia</h2>
+        <p>Beyond a day off, 9 October is memory and identity: a civic procession with the Reial Senyera, an offering to Jaume I, the anthem, a mascletà, and in the afternoon the Moors and Christians parade. It is also Sant Donís, with the tradition of gifting a marzipan <em>mocadorà</em>. In 2026 the celebration has special weight as the 750th anniversary of Jaume I’s death.</p>
+        <h2>What to do in Valencia on 9 October</h2>
+        <ul>
+          <li><strong>Morning in the centre:</strong> follow the Civic Procession from Ajuntament square toward the Cathedral and the offering at Jaume I’s statue (Parterre / Alfons el Magnànim square).</li>
+          <li><strong>Mascletà:</strong> after the procession, fireworks usually fire in Ajuntament square — powder, rhythm and festival energy.</li>
+          <li><strong>Afternoon:</strong> Moors and Christians parade through the centre (Glorieta, Carrer de la Pau, Ajuntament…).</li>
+          <li><strong>Sant Donís:</strong> buy or gift a mocadorà — Valencia’s sweet signature of the day.</li>
+          <li><strong>Walk and terrace:</strong> after the events, enjoy a vermouth or lunch in El Carmen, Ruzafa or near La Petxina.</li>
+        </ul>
+        <h2>Haircuts to celebrate 9 October</h2>
+        <p>A holiday like this calls for looking sharp — photos, family, parade and night out. At La Petxina we will get you ready with looks that work from the mascletà to dinner:</p>
+        <ul>
+          <li><strong>Clean fade + shaped beard:</strong> the most requested combo for a fresh, defined look.</li>
+          <li><strong>Textured crop:</strong> modern, easy to style and full of movement for a long day.</li>
+          <li><strong>Classic taper:</strong> elegant for formal moments or a family meal.</li>
+          <li><strong>Cut + beard tidy-up:</strong> the fast upgrade to celebrate with Valencian style.</li>
+        </ul>
+        <p>See our <a href="../services.html">services menu</a> and pick yours. Holiday slots go fast — book now.</p>
+        <h2>Book at La Petxina (open on 9 October)</h2>
+        <p>On 9 October <strong>only La Petxina is open</strong>, at C/ Juan Llorens 18. El Carmen will remain closed.</p>
+        <p>
+          <a class="btn btn--primary" href="{BOOKSY_PETXINA}" target="_blank" rel="noopener">Book cut · La Petxina (Booksy)</a>
+          <a class="btn btn--ghost" href="{WA_PETXINA_EN}" target="_blank" rel="noopener">WhatsApp</a>
+        </p>
+        <p>Address: <a href="https://www.google.com/maps/search/?api=1&query=C%2F+Juan+Llorens+18%2C+46008+Valencia" target="_blank" rel="noopener">C/ Juan Llorens 18, 46008 Valencia</a>. More on the <a href="../la-petxina.html">La Petxina page</a>.</p>
+        """,
+    },
     {
         "es_slug": "barberia-en-valencia.html",
         "en_slug": "barbershop-in-valencia.html",
@@ -564,14 +662,27 @@ def write_post(lang: str, p: dict) -> None:
         n = n.replace('href="../../es/blog/index.html" hreflang="es"', f'href="../../es/blog/{other}" hreflang="es"')
     html += n
     back = "← Volver al blog" if is_es else "← Back to blog"
-    cta_title = "Reserva tu cita" if is_es else "Book your appointment"
-    cta_text = (
-        "Elige El Carmen o La Petxina y reserva por Booksy o WhatsApp."
-        if is_es
-        else "Choose El Carmen or La Petxina and book on Booksy or WhatsApp."
-    )
-    book_el = "Reservar El Carmen" if is_es else "Book El Carmen"
-    book_pet = "Reservar La Petxina" if is_es else "Book La Petxina"
+    custom_cta = p.get("cta_es" if is_es else "cta_en")
+    if custom_cta:
+        cta_block = f'<div class="blog-post__cta">{custom_cta}</div>'
+    else:
+        cta_title = "Reserva tu cita" if is_es else "Book your appointment"
+        cta_text = (
+            "Elige El Carmen o La Petxina y reserva por Booksy o WhatsApp."
+            if is_es
+            else "Choose El Carmen or La Petxina and book on Booksy or WhatsApp."
+        )
+        book_el = "Reservar El Carmen" if is_es else "Book El Carmen"
+        book_pet = "Reservar La Petxina" if is_es else "Book La Petxina"
+        cta_block = f"""<div class="blog-post__cta">
+        <h2>{cta_title}</h2>
+        <p>{cta_text}</p>
+        <div class="cta__actions cta__actions--stack">
+          <a class="btn btn--primary" href="https://booksy.com/es-es/132769_barber-shop-valencia-el-carmen_barberia_58087_valencia" target="_blank" rel="noopener">{book_el}</a>
+          <a class="btn btn--ghost" href="https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia" target="_blank" rel="noopener">{book_pet}</a>
+          <a class="btn btn--ghost" href="https://api.whatsapp.com/send/?phone=34677142958&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>"""
     html += f"""
   <article class="section blog-post">
     <div class="container blog-post__wrap">
@@ -587,15 +698,7 @@ def write_post(lang: str, p: dict) -> None:
       <div class="blog-post__content prose">
         {body}
       </div>
-      <div class="blog-post__cta">
-        <h2>{cta_title}</h2>
-        <p>{cta_text}</p>
-        <div class="cta__actions cta__actions--stack">
-          <a class="btn btn--primary" href="https://booksy.com/es-es/132769_barber-shop-valencia-el-carmen_barberia_58087_valencia" target="_blank" rel="noopener">{book_el}</a>
-          <a class="btn btn--ghost" href="https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia" target="_blank" rel="noopener">{book_pet}</a>
-          <a class="btn btn--ghost" href="https://api.whatsapp.com/send/?phone=34677142958&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">WhatsApp</a>
-        </div>
-      </div>
+      {cta_block}
     </div>
   </article>
 """

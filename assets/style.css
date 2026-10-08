@@ -1012,6 +1012,19 @@ button, input, select, textarea { font: inherit; color: inherit; }
   text-underline-offset: 0.15em;
 }
 
+.prose a.btn {
+  text-decoration: none;
+  display: inline-flex;
+  margin: 0.35rem 0.5rem 0.35rem 0;
+}
+
+.blog-notice {
+  background: var(--bg-elevated);
+  border-left: 3px solid var(--gold);
+  padding: 0.9rem 1rem;
+  color: var(--fg) !important;
+}
+
 .blog-post__cta {
   margin-top: 2.75rem;
   padding: 1.75rem;

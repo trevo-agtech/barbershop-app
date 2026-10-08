@@ -179,8 +179,16 @@ EN_REPLACEMENTS: list[tuple[str, str]] = [
      "Barbershop in Valencia: men's style and professional service"),
     ("6 de octubre de 2026", "6 October 2026"),
     ("3 de octubre de 2026", "3 October 2026"),
+    ("./blog/9-octubre-valencia-barberia-abierta-la-petxina.html",
+     "./blog/9-october-valencia-barbershop-open-la-petxina.html"),
     ("./blog/barberia-en-valencia.html", "./blog/barbershop-in-valencia.html"),
     ("./blog/barberia-cita-previa-valencia.html", "./blog/appointment-barbershop-valencia.html"),
+    ("9 de octubre en Valencia: La Petxina abierta",
+     "9 October in Valencia: La Petxina open"),
+    ("Feriado del Nou d’Octubre: qué hacer, cortes para celebrar y reserva en La Petxina. El Carmen cerrado.",
+     "Nou d’Octubre holiday: what to do, celebration cuts and booking at La Petxina. El Carmen closed."),
+    ("8 de octubre de 2026", "8 October 2026"),
+    ('alt="9 de octubre en Barber Shop Valencia"', 'alt="9 October at Barber Shop Valencia"'),
     ('alt="Zona de trabajo Barber Shop Valencia"', 'alt="Work area at Barber Shop Valencia"'),
     ('alt="Interior Barber Shop Valencia"', 'alt="Interior of Barber Shop Valencia"'),
 ]
@@ -410,6 +418,7 @@ def build() -> None:
     blog_pages = {
         "es": [
             "index.html",
+            "9-octubre-valencia-barberia-abierta-la-petxina.html",
             "barberia-en-valencia.html",
             "barberia-cita-previa-valencia.html",
             "corte-pelo-hombre-valencia.html",
@@ -417,6 +426,7 @@ def build() -> None:
         ],
         "en": [
             "index.html",
+            "9-october-valencia-barbershop-open-la-petxina.html",
             "barbershop-in-valencia.html",
             "appointment-barbershop-valencia.html",
             "mens-haircut-valencia.html",
