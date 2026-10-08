@@ -8,7 +8,8 @@
   --accent-soft: rgba(176, 141, 87, 0.16);
   --line: #e7e3db;
   --on-photo: #f7f6f3;
-  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-display: "Rye", "Alfa Slab One", Georgia, serif;
+  --font-brand: "Alfa Slab One", "Rye", Georgia, serif;
   --font-body: "Source Sans 3", "Source Sans Pro", sans-serif;
   --max: 1120px;
   --nav-h: 4.5rem;
@@ -63,19 +64,43 @@ button, input, select, textarea { font: inherit; color: inherit; }
   display: flex;
   align-items: center;
   gap: 0.65rem;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.98rem;
-  letter-spacing: -0.03em;
+  font-family: var(--font-brand);
+  font-weight: 400;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
   line-height: 1.1;
   z-index: 2;
 }
 
 .nav__brand img {
-  width: 2.9rem;
-  height: 2.9rem;
+  width: 3.1rem;
+  height: 3.1rem;
   object-fit: contain;
   flex-shrink: 0;
+}
+
+.crest {
+  padding: 4.5rem 0 5rem;
+  background:
+    radial-gradient(ellipse at center, rgba(176, 141, 87, 0.1), transparent 58%),
+    var(--bg);
+  border-block: 1px solid var(--line);
+}
+
+.crest__inner {
+  display: grid;
+  place-items: center;
+}
+
+.crest__mark {
+  width: min(100%, 22rem);
+  height: auto;
+  filter: drop-shadow(0 18px 36px rgba(28, 27, 24, 0.12));
+}
+
+@media (min-width: 720px) {
+  .crest { padding: 5.5rem 0 6rem; }
+  .crest__mark { width: min(100%, 28rem); }
 }
 
 .nav__brand span {
@@ -275,20 +300,21 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 
 .hero__brand {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(3.1rem, 8vw, 6rem);
-  line-height: 0.92;
-  letter-spacing: -0.02em;
+  font-family: var(--font-brand);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 7vw, 5.2rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
   margin-bottom: 1.1rem;
   animation: fadeUp 0.8s ease both;
 }
 
 .hero__headline {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(1.45rem, 2.8vw, 1.9rem);
-  letter-spacing: -0.01em;
+  font-weight: 400;
+  font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+  letter-spacing: 0.02em;
   margin-bottom: 0.75rem;
   animation: fadeUp 0.8s ease 0.1s both;
 }
@@ -321,10 +347,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 .section__title {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(2.2rem, 4.4vw, 3.1rem);
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  font-weight: 400;
+  font-size: clamp(1.9rem, 4vw, 2.7rem);
+  letter-spacing: 0.02em;
+  line-height: 1.15;
   margin-bottom: 0.75rem;
 }
 
@@ -360,8 +386,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
   padding-top: 1.1rem;
   border-top: 1px solid var(--line);
   font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-weight: 400;
+  letter-spacing: 0.02em;
 }
 
 .owner span {
@@ -387,16 +413,16 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 .service__name {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 400;
   font-size: 1.15rem;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.01em;
 }
 
 .service__price {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 400;
   color: var(--accent);
-  letter-spacing: -0.02em;
+  letter-spacing: 0.01em;
 }
 
 .service__desc { color: var(--muted); font-size: 0.95rem; }
@@ -418,8 +444,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 .shop-block h3 {
   font-family: var(--font-display);
-  font-size: 1.6rem;
-  letter-spacing: -0.03em;
+  font-size: 1.55rem;
+  letter-spacing: 0.02em;
   margin-bottom: 0.35rem;
 }
 
@@ -489,9 +515,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 .card h3 {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 400;
   font-size: 1.2rem;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.02em;
   margin-bottom: 0.45rem;
 }
 
@@ -573,7 +599,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .team-card h3 {
   font-family: var(--font-display);
   font-size: 1.15rem;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.02em;
   margin: 1rem 1.1rem 0;
 }
 
@@ -607,11 +633,11 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .partners:hover .partners__track { animation-play-state: paused; }
 
 .brand {
-  font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-family: var(--font-brand);
+  font-weight: 400;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: rgba(247, 246, 243, 0.78);
   opacity: 0.78;
   white-space: nowrap;
@@ -631,9 +657,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 .cta h2 {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(2.2rem, 4.4vw, 3.2rem);
-  letter-spacing: -0.02em;
+  font-weight: 400;
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  letter-spacing: 0.02em;
   margin-bottom: 0.75rem;
 }
 
