@@ -8,6 +8,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "https://barbershopvalencia.es"
 
+from analytics import ensure_gtag  # noqa: E402
+
 PAGE_MAP = {
     "index.html": "index.html",
     "el-carmen.html": "el-carmen.html",
@@ -315,7 +317,7 @@ def patch_existing_lang(lang_dir: str, page_files: list[str]) -> None:
             continue
         html = path.read_text()
         html = apply_switch_and_hreflang(html, lang_dir, name)
-        path.write_text(html)
+        path.write_text(ensure_gtag(html))
         print(f"patched {lang_dir}/{name}")
 
 
@@ -441,13 +443,14 @@ def build_ru_pages() -> None:
         html = html.replace("Reservar por local", "Запись по салону")
         html = html.replace("Book por local", "Запись по салону")
         html = html.replace("Precise cuts. Current style.", "Точные стрижки. Актуальный стиль.")
-        (ru_dir / en_name).write_text(html)
+        (ru_dir / en_name).write_text(ensure_gtag(html))
         print(f"ok ru/{en_name}")
 
 
 def update_root_and_sitemap() -> None:
     (ROOT / "index.html").write_text(
-        f"""<!DOCTYPE html>
+        ensure_gtag(
+            f"""<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="utf-8">
@@ -469,6 +472,7 @@ def update_root_and_sitemap() -> None:
 </body>
 </html>
 """
+        )
     )
 
     from datetime import date

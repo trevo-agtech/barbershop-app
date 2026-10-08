@@ -7,6 +7,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "https://barbershopvalencia.es"
 
+from analytics import ensure_gtag  # noqa: E402
+
 FOOTER_ES = """<footer class="footer">
     <div class="container footer__grid">
       <div>
@@ -628,7 +630,7 @@ def write_index(lang: str) -> None:
 """
     html += FOOTER_ES if is_es else FOOTER_EN
     out = ROOT / lang / "blog" / "index.html"
-    out.write_text(html)
+    out.write_text(ensure_gtag(html))
     print("ok", out.relative_to(ROOT))
 
 
@@ -707,7 +709,7 @@ def write_post(lang: str, p: dict) -> None:
 """
     html += FOOTER_ES if is_es else FOOTER_EN
     out = ROOT / lang / "blog" / slug
-    out.write_text(html)
+    out.write_text(ensure_gtag(html))
     print("ok", out.relative_to(ROOT))
 
 

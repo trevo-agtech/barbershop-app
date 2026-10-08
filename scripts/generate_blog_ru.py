@@ -7,6 +7,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "https://barbershopvalencia.es"
+
+from analytics import ensure_gtag  # noqa: E402
 BOOKSY_PETXINA = "https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia"
 WA = "https://api.whatsapp.com/send/?phone=34677142958&text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%B2%20Barber%20Shop%20Valencia%20La%20Petxina.&type=phone_number&app_absent=0"
 
@@ -312,7 +314,7 @@ def write_index() -> None:
       </article>
 """
     html += "</div></section>\n" + FOOTER
-    (out / "index.html").write_text(html)
+    (out / "index.html").write_text(ensure_gtag(html))
     print("ok ru/blog/index.html")
 
 
@@ -354,7 +356,7 @@ def write_posts() -> None:
   </article>
 """
         html += FOOTER
-        (ROOT / "ru" / "blog" / p["slug"]).write_text(html)
+        (ROOT / "ru" / "blog" / p["slug"]).write_text(ensure_gtag(html))
         print("ok ru/blog/" + p["slug"])
 
 

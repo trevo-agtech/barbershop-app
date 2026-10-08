@@ -8,6 +8,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "https://barbershopvalencia.es"
 
+from analytics import ensure_gtag  # noqa: E402
+
 PAGE_MAP_ES_TO_EN = {
     "index.html": "index.html",
     "el-carmen.html": "el-carmen.html",
@@ -346,7 +348,7 @@ def build() -> None:
         es_html = add_hreflang(es_html, "es", es_name)
         es_html = add_lang_switch(es_html, "es", es_name)
         es_html = ensure_blog_nav(es_html, "es")
-        (es_dir / es_name).write_text(es_html)
+        (es_dir / es_name).write_text(ensure_gtag(es_html))
 
         # English
         en_name = PAGE_MAP_ES_TO_EN[es_name]
@@ -362,11 +364,11 @@ def build() -> None:
         en_html = add_hreflang(en_html, "en", es_name)
         en_html = add_lang_switch(en_html, "en", es_name)
         en_html = ensure_blog_nav(en_html, "en")
-        (en_dir / en_name).write_text(en_html)
+        (en_dir / en_name).write_text(ensure_gtag(en_html))
         print(f"ok es/{es_name} + en/{en_name}")
 
     # Root redirect by domain (always refresh)
-    (ROOT / "index.html").write_text(
+    (ROOT / "index.html").write_text(ensure_gtag(
         f"""<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -376,20 +378,20 @@ def build() -> None:
   <meta name="robots" content="noindex, follow">
   <link rel="alternate" hreflang="es" href="{BASE}/es/">
   <link rel="alternate" hreflang="en" href="{BASE}/en/">
+  <link rel="alternate" hreflang="ru" href="{BASE}/ru/">
   <link rel="alternate" hreflang="x-default" href="{BASE}/es/">
   <link rel="canonical" href="{BASE}/es/">
   <meta http-equiv="refresh" content="0; url=es/">
   <script>
-    // .com and .es both open Spanish by default; English via /en/ or the ES|EN switcher
     location.replace("es/");
   </script>
 </head>
 <body>
-  <p><a href="es/">Español</a> · <a href="en/">English</a></p>
+  <p><a href="es/">Español</a> · <a href="en/">English</a> · <a href="ru/">Русский</a></p>
 </body>
 </html>
 """
-    )
+    ))
 
     # Sitemap both languages (+ blog)
     from datetime import date
