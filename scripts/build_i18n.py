@@ -222,11 +222,14 @@ def fix_seo_base(html: str, lang: str, page: str) -> str:
 
 def add_hreflang(html: str, lang: str, es_page: str) -> str:
     en_page = PAGE_MAP_ES_TO_EN[es_page]
+    ru_page = en_page
     es_href = f"{BASE}/es/" if es_page == "index.html" else f"{BASE}/es/{es_page}"
     en_href = f"{BASE}/en/" if en_page == "index.html" else f"{BASE}/en/{en_page}"
+    ru_href = f"{BASE}/ru/" if ru_page == "index.html" else f"{BASE}/ru/{ru_page}"
     block = (
         f'  <link rel="alternate" hreflang="es" href="{es_href}">\n'
         f'  <link rel="alternate" hreflang="en" href="{en_href}">\n'
+        f'  <link rel="alternate" hreflang="ru" href="{ru_href}">\n'
         f'  <link rel="alternate" hreflang="x-default" href="{es_href}">\n'
     )
     html = re.sub(r'  <link rel="alternate" hreflang="[^"]+" href="[^"]*">\n', "", html)
@@ -236,15 +239,19 @@ def add_hreflang(html: str, lang: str, es_page: str) -> str:
 
 def add_lang_switch(html: str, lang: str, es_page: str) -> str:
     en_page = PAGE_MAP_ES_TO_EN[es_page]
+    ru_page = en_page
     es_href = f"./{es_page}" if lang == "es" else f"../es/{es_page}"
     en_href = f"./{en_page}" if lang == "en" else f"../en/{en_page}"
+    ru_href = f"./{ru_page}" if lang == "ru" else f"../ru/{ru_page}"
     es_cls = ' class="is-active"' if lang == "es" else ""
     en_cls = ' class="is-active"' if lang == "en" else ""
-    label = "Language" if lang == "en" else "Idioma"
+    ru_cls = ' class="is-active"' if lang == "ru" else ""
+    label = {"es": "Idioma", "en": "Language", "ru": "Язык"}.get(lang, "Language")
     switch = (
         f'      <div class="lang" aria-label="{label}">\n'
         f'        <a{es_cls} href="{es_href}" hreflang="es">ES</a>\n'
         f'        <a{en_cls} href="{en_href}" hreflang="en">EN</a>\n'
+        f'        <a{ru_cls} href="{ru_href}" hreflang="ru">RU</a>\n'
         f'      </div>\n'
     )
     html = re.sub(r'      <div class="lang"[\s\S]*?</div>\n', "", html)
