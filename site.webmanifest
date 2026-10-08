@@ -1,9 +1,9 @@
 {
   "name": "Barber Shop Valencia",
   "short_name": "Barber Shop",
-  "description": "Barbería en Valencia con dos tiendas: El Carmen y La Petxina.",
+  "description": "Barber Shop Valencia — El Carmen & La Petxina.",
   "lang": "es",
-  "start_url": "./index.html",
+  "start_url": "./es/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#121210",
