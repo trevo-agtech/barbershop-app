@@ -1,3 +1,6 @@
 assets/el-carmen/*.JPG
 assets/el-carmen/*.jpg
 !assets/el-carmen/web/
+assets/la-petxina/*.JPG
+assets/la-petxina/*.jpg
+!assets/la-petxina/web/

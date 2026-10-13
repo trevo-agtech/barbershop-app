@@ -232,7 +232,7 @@ POSTS = [
           <li>Equipo de barberos con criterio y detalle en cada acabado.</li>
           <li>Reserva online en Booksy o por WhatsApp, sin complicaciones.</li>
           <li>Productos premium para cabello y barba.</li>
-          <li>Mismo horario en ambas tiendas: lunes a viernes 10:00–20:00, sábado 10:00–18:00 y domingo 11:00–17:00.</li>
+          <li>Mismo horario en ambas tiendas: lunes a viernes 10:00–20:00 y sábado 10:00–18:00.</li>
         </ul>
         <h2>Servicios que más piden en Valencia</h2>
         <h3>Cortes modernos y clásicos</h3>
@@ -254,7 +254,7 @@ POSTS = [
           <li>Barbers focused on clean finishes and real advice.</li>
           <li>Book online on Booksy or WhatsApp — no hassle.</li>
           <li>Premium products for hair and beard.</li>
-          <li>Same hours in both shops: Mon–Fri 10:00–20:00, Sat 10:00–18:00, Sun 11:00–17:00.</li>
+          <li>Same hours in both shops: Mon–Fri 10:00–20:00 and Sat 10:00–18:00.</li>
         </ul>
         <h2>Services men book most in Valencia</h2>
         <h3>Modern and classic cuts</h3>
