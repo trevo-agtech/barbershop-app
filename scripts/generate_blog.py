@@ -307,7 +307,7 @@ POSTS = [
         <h3>Tratamientos faciales</h3>
         <p>Limpieza, exfoliación e hidratación pensadas para la piel masculina.</p>
         <h2>Reserva ahora</h2>
-        <p>Elige tu local favorito y asegura tu hueco. También puedes escribirnos a <a href="mailto:info@barbershopvalencia.com">info@barbershopvalencia.com</a> o al WhatsApp +34 677 142 958.</p>
+        <p>Elige tu local favorito y asegura tu hueco. También puedes escribirnos a <a href="mailto:info@barbershopvalencia.com">info@barbershopvalencia.com</a> o por WhatsApp: El Carmen +34 634 456 940, La Petxina +34 677 142 958.</p>
         """,
         "body_en": """
         <p>At Barber Shop Valencia your time matters. That is why we offer a <strong>barbershop with appointments in Valencia</strong>: you arrive, sit down, and we work on your cut or beard without unnecessary queues.</p>
@@ -332,7 +332,7 @@ POSTS = [
         <h3>Facial treatments</h3>
         <p>Cleansing, exfoliation and hydration designed for men's skin.</p>
         <h2>Book now</h2>
-        <p>Pick your preferred shop and lock in a slot. You can also email <a href="mailto:info@barbershopvalencia.com">info@barbershopvalencia.com</a> or WhatsApp +34 677 142 958.</p>
+        <p>Pick your preferred shop and lock in a slot. You can also email <a href="mailto:info@barbershopvalencia.com">info@barbershopvalencia.com</a> or WhatsApp: El Carmen +34 634 456 940, La Petxina +34 677 142 958.</p>
         """,
     },
     {
@@ -679,13 +679,16 @@ def write_post(lang: str, p: dict) -> None:
         )
         book_el = "Reservar El Carmen" if is_es else "Book El Carmen"
         book_pet = "Reservar La Petxina" if is_es else "Book La Petxina"
+        wa_el = "Hola%2C%20quiero%20reservar%20en%20Barber%20Shop%20Valencia%20El%20Carmen." if is_es else "Hi%2C%20I%20want%20to%20book%20at%20Barber%20Shop%20Valencia%20El%20Carmen."
+        wa_pet = "Hola%2C%20quiero%20reservar%20en%20Barber%20Shop%20Valencia%20La%20Petxina." if is_es else "Hi%2C%20I%20want%20to%20book%20at%20Barber%20Shop%20Valencia%20La%20Petxina."
         cta_block = f"""<div class="blog-post__cta">
         <h2>{cta_title}</h2>
         <p>{cta_text}</p>
         <div class="cta__actions cta__actions--stack">
           <a class="btn btn--primary" href="https://booksy.com/es-es/132769_barber-shop-valencia-el-carmen_barberia_58087_valencia" target="_blank" rel="noopener">{book_el}</a>
           <a class="btn btn--ghost" href="https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia" target="_blank" rel="noopener">{book_pet}</a>
-          <a class="btn btn--ghost" href="https://api.whatsapp.com/send/?phone=34677142958&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn btn--ghost" href="https://api.whatsapp.com/send/?phone=34634456940&text={wa_el}&type=phone_number&app_absent=0" target="_blank" rel="noopener">WhatsApp El Carmen</a>
+          <a class="btn btn--ghost" href="https://api.whatsapp.com/send/?phone=34677142958&text={wa_pet}&type=phone_number&app_absent=0" target="_blank" rel="noopener">WhatsApp La Petxina</a>
         </div>
       </div>"""
     html += f"""
