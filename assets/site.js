@@ -104,8 +104,16 @@
       page_path: location.pathname,
       language: document.documentElement.lang || ""
     };
-    if (whatsapp) trackEvent("click_whatsapp", params);
-    if (booksy) trackEvent("click_booksy", params);
+    if (whatsapp) {
+      trackEvent("click_whatsapp", params);
+      if (params.shop === "el_carmen") trackEvent("click_whatsapp_el_carmen", params);
+      if (params.shop === "la_petxina") trackEvent("click_whatsapp_la_petxina", params);
+    }
+    if (booksy) {
+      trackEvent("click_booksy", params);
+      if (params.shop === "el_carmen") trackEvent("click_booksy_el_carmen", params);
+      if (params.shop === "la_petxina") trackEvent("click_booksy_la_petxina", params);
+    }
     if (reservar) {
       params.channel = whatsapp ? "whatsapp" : booksy ? "booksy" : "page";
       trackEvent("click_reservar", params);
