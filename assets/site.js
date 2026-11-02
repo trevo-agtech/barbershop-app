@@ -84,41 +84,119 @@
     });
   }
 
+  stampOutboundLinks();
+
   document.addEventListener("click", function (event) {
     var link = event.target.closest("a");
     if (!link) return;
+    stampLink(link);
     var href = link.getAttribute("href") || "";
     if (!href || href.charAt(0) === "#") {
       if (!/^#(reservar|tiendas)\b/i.test(href)) return;
     }
     var label = linkLabel(link);
-    var whatsapp = /whatsapp\.com|wa\.me/i.test(href);
-    var booksy = /booksy\.com/i.test(href);
+    var channel = channelOf(href);
     var reservar = isReserveCta(href, label);
-    if (!whatsapp && !booksy && !reservar) return;
+    if (!channel && !reservar) return;
 
-    var params = {
-      link_text: label,
-      shop: shopFrom(href, label),
-      placement: placementOf(link),
-      page_path: location.pathname,
-      language: document.documentElement.lang || ""
-    };
-    if (whatsapp) {
+    var params = trackingParams(link, href, label, channel);
+    trackEvent("click_outbound", params);
+    if (channel === "whatsapp") {
       trackEvent("click_whatsapp", params);
       if (params.shop === "el_carmen") trackEvent("click_whatsapp_el_carmen", params);
       if (params.shop === "la_petxina") trackEvent("click_whatsapp_la_petxina", params);
     }
-    if (booksy) {
+    if (channel === "booksy") {
       trackEvent("click_booksy", params);
       if (params.shop === "el_carmen") trackEvent("click_booksy_el_carmen", params);
       if (params.shop === "la_petxina") trackEvent("click_booksy_la_petxina", params);
     }
+    if (channel === "instagram") trackEvent("click_instagram", params);
+    if (channel === "facebook") trackEvent("click_facebook", params);
+    if (channel === "tiktok") trackEvent("click_tiktok", params);
+    if (channel === "maps") trackEvent("click_maps", params);
+    if (channel === "email") trackEvent("click_email", params);
     if (reservar) {
-      params.channel = whatsapp ? "whatsapp" : booksy ? "booksy" : "page";
+      params.channel = channel || "page";
       trackEvent("click_reservar", params);
     }
   });
+
+  function stampOutboundLinks() {
+    document.querySelectorAll("a[href]").forEach(stampLink);
+  }
+
+  function stampLink(link) {
+    if (link.dataset.utmReady === "1") return;
+    var href = link.getAttribute("href") || "";
+    var channel = channelOf(href);
+    if (!channel || /^mailto:/i.test(href)) {
+      if (channel) link.dataset.utc = utcCode(link, href, channel);
+      if (channel) link.dataset.utmReady = "1";
+      return;
+    }
+    var label = linkLabel(link);
+    var placement = placementOf(link);
+    var shop = shopFrom(href, label);
+    var lang = languageCode();
+    var utc = [channel, shop, placement, lang].join("_");
+    try {
+      var url = new URL(href, location.href);
+      if (!url.searchParams.has("utm_source")) {
+        url.searchParams.set("utm_source", "website");
+        url.searchParams.set("utm_medium", placement);
+        url.searchParams.set("utm_campaign", channel);
+        url.searchParams.set("utm_content", shop);
+        url.searchParams.set("utm_term", pageCode());
+        url.searchParams.set("utc", utc);
+        link.setAttribute("href", url.toString());
+      }
+    } catch (error) {}
+    link.dataset.utc = utc;
+    link.dataset.utmReady = "1";
+  }
+
+  function trackingParams(link, href, label, channel) {
+    return {
+      link_text: label,
+      link_url: href,
+      shop: shopFrom(href, label),
+      placement: placementOf(link),
+      page_path: location.pathname,
+      language: languageCode(),
+      utm_source: "website",
+      utm_medium: placementOf(link),
+      utm_campaign: channel || "reservar",
+      utm_content: shopFrom(href, label),
+      utm_term: pageCode(),
+      utc: link.dataset.utc || utcCode(link, href, channel || "reservar")
+    };
+  }
+
+  function utcCode(link, href, channel) {
+    return [channel, shopFrom(href, linkLabel(link)), placementOf(link), languageCode()].join("_");
+  }
+
+  function channelOf(href) {
+    if (/booksy\.com/i.test(href)) return "booksy";
+    if (/whatsapp\.com|wa\.me/i.test(href)) return "whatsapp";
+    if (/instagram\.com/i.test(href)) return "instagram";
+    if (/facebook\.com|fb\.com/i.test(href)) return "facebook";
+    if (/tiktok\.com/i.test(href)) return "tiktok";
+    if (/google\.com\/maps|maps\.google|goo\.gl\/maps/i.test(href)) return "maps";
+    if (/^mailto:/i.test(href)) return "email";
+    return "";
+  }
+
+  function languageCode() {
+    return (document.documentElement.lang || "es").slice(0, 2).toLowerCase();
+  }
+
+  function pageCode() {
+    var path = location.pathname.replace(/\/index\.html$/i, "/").replace(/\.html$/i, "");
+    var parts = path.split("/").filter(Boolean);
+    return (parts.join("_") || "home").slice(0, 80);
+  }
 
   function linkLabel(link) {
     var text = (link.textContent || "").replace(/\s+/g, " ").trim();
@@ -133,7 +211,8 @@
   }
 
   function shopFrom(href, label) {
-    var hay = (href + " " + label).toLowerCase();
+    var clean = String(href || "").replace(/[?&](?:utm_[a-z]+|utc)=[^&#]*/gi, "");
+    var hay = (clean + " " + label).toLowerCase();
     var carmen = /el[- ]carmen|132769|34634456940/.test(hay);
     var petxinaLink = /petxina|12979/.test(hay);
     var defaultWhatsapp = /34677142958/.test(hay) && !petxinaLink;
@@ -144,6 +223,8 @@
       if (/\/el-carmen(?:\.html|\/|$)/i.test(location.pathname)) return "el_carmen";
       return "general";
     }
+    if (/juan(?:\s|\+|%20)*llorens/.test(hay)) return "la_petxina";
+    if (/google\.com\/maps|maps\.google/.test(hay) && /baja/.test(hay)) return "el_carmen";
     if (/\/el-carmen(?:\.html|\/|$)/i.test(location.pathname)) return "el_carmen";
     if (/\/la-petxina(?:\.html|\/|$)/i.test(location.pathname)) return "la_petxina";
     return "general";
