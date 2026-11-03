@@ -1,4 +1,15 @@
 (function () {
+  var host = location.hostname.toLowerCase();
+  var path = location.pathname.replace(/index\.html$/i, "");
+  if (host === "barbershopvalencia.com" || host === "www.barbershopvalencia.com" || host === "www.barbershopvalencia.es") {
+    location.replace("https://barbershopvalencia.es" + path + location.search + location.hash);
+    return;
+  }
+  if (/index\.html$/i.test(location.pathname)) {
+    location.replace(path + location.search + location.hash);
+    return;
+  }
+
   var toggle = document.querySelector("[data-nav-toggle]");
   var nav = document.querySelector("[data-nav]");
   if (toggle && nav) {

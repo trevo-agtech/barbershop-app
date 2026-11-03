@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# /index.html is an alternate of the directory URL.
+RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
+RewriteRule ^(.*/)?index\.html$ https://barbershopvalencia.es/$1 [R=301,L]
+
+# barbershopvalencia.com and www are alternates of the apex .es host.
+RewriteCond %{HTTP_HOST} ^(www\.)?barbershopvalencia\.com$ [NC,OR]
+RewriteCond %{HTTP_HOST} ^www\.barbershopvalencia\.es$ [NC]
+RewriteRule ^ https://barbershopvalencia.es%{REQUEST_URI} [R=301,L]
