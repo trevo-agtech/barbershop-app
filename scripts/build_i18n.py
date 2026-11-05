@@ -97,8 +97,8 @@ EN_REPLACEMENTS: list[tuple[str, str]] = [
     ("Booksy La Petxina", "Booksy La Petxina"),
     # Contact
     ("Escríbenos", "Write to us"),
-    ("Sugerencias, dudas o elogios. El mensaje se prepara para info@barbershopvalencia.com.",
-     "Suggestions, questions or compliments. The message is prepared for info@barbershopvalencia.com."),
+    ("Sugerencias, dudas o elogios. El mensaje se prepara para infobarbershopvalencia@gmail.com.",
+     "Suggestions, questions or compliments. The message is prepared for infobarbershopvalencia@gmail.com."),
     ("Correo", "Email"),
     ("Nombre", "Name"),
     ("Teléfono", "Phone"),

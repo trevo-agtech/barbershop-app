@@ -86,11 +86,11 @@
         form_type: String(tipo || "contacto"),
         page_path: location.pathname
       });
-      window.location.href = "mailto:info@barbershopvalencia.com?subject=" + subject + "&body=" + body;
+      window.location.href = "mailto:infobarbershopvalencia@gmail.com?subject=" + subject + "&body=" + body;
       var note = form.querySelector("[data-form-note]");
       if (note) {
         note.hidden = false;
-        note.textContent = "Se abrió tu correo para enviar el mensaje a info@barbershopvalencia.com.";
+        note.textContent = "Se abrió tu correo para enviar el mensaje a infobarbershopvalencia@gmail.com.";
       }
     });
   }
@@ -128,6 +128,11 @@
     if (channel === "tiktok") trackEvent("click_tiktok", params);
     if (channel === "maps") trackEvent("click_maps", params);
     if (channel === "email") trackEvent("click_email", params);
+    if (params.utm_campaign === "black_friday") {
+      trackEvent("click_black_friday", params);
+      if (params.shop === "el_carmen") trackEvent("click_black_friday_el_carmen", params);
+      if (params.shop === "la_petxina") trackEvent("click_black_friday_la_petxina", params);
+    }
     if (reservar) {
       params.channel = channel || "page";
       trackEvent("click_reservar", params);
@@ -150,14 +155,14 @@
     var label = linkLabel(link);
     var placement = placementOf(link);
     var shop = shopFrom(href, label);
-    var lang = languageCode();
-    var utc = [channel, shop, placement, lang].join("_");
+    var campaign = campaignOf(link, channel);
+    var utc = utcCode(link, href, channel);
     try {
       var url = new URL(href, location.href);
       if (!url.searchParams.has("utm_source")) {
         url.searchParams.set("utm_source", "website");
         url.searchParams.set("utm_medium", placement);
-        url.searchParams.set("utm_campaign", channel);
+        url.searchParams.set("utm_campaign", campaign);
         url.searchParams.set("utm_content", shop);
         url.searchParams.set("utm_term", pageCode());
         url.searchParams.set("utc", utc);
@@ -178,15 +183,35 @@
       language: languageCode(),
       utm_source: "website",
       utm_medium: placementOf(link),
-      utm_campaign: channel || "reservar",
+      utm_campaign: campaignOf(link, channel),
       utm_content: shopFrom(href, label),
       utm_term: pageCode(),
-      utc: link.dataset.utc || utcCode(link, href, channel || "reservar")
+      utc: link.dataset.utc || utcCode(link, href, channel || "reservar"),
+      bf_offer: blackFridayOffer(link)
     };
   }
 
+  function isBlackFridayLink(link) {
+    return !!(link.closest(".bf-bar, .bf-deals, [data-bf-link]") || link.hasAttribute("data-bf-restore-href"));
+  }
+
+  function campaignOf(link, channel) {
+    return isBlackFridayLink(link) ? "black_friday" : (channel || "reservar");
+  }
+
+  function blackFridayOffer(link) {
+    if (!isBlackFridayLink(link)) return "";
+    if (link.closest(".bf-bar")) return "bar";
+    if (link.closest(".bf-deal--flash")) return "corte_20";
+    if (link.closest(".bf-deals")) return "productos_10";
+    if (link.closest(".hero")) return "hero";
+    return "articulo";
+  }
+
   function utcCode(link, href, channel) {
-    return [channel, shopFrom(href, linkLabel(link)), placementOf(link), languageCode()].join("_");
+    var parts = [channel, shopFrom(href, linkLabel(link)), placementOf(link), languageCode()];
+    if (isBlackFridayLink(link)) parts.unshift("black_friday");
+    return parts.join("_");
   }
 
   function channelOf(href) {

@@ -39,7 +39,7 @@ FOOTER = """<footer class="footer">
     </div>
     <div class="container footer__base">
       <p>© Barber Shop Valencia</p>
-      <p><a href="mailto:info@barbershopvalencia.com">info@barbershopvalencia.com</a></p>
+      <p><a href="mailto:infobarbershopvalencia@gmail.com">infobarbershopvalencia@gmail.com</a></p>
     </div>
   </footer>
   <a class="wa" href="https://api.whatsapp.com/send/?phone=34677142958&text&type=phone_number&app_absent=0" target="_blank" rel="noopener" aria-label="WhatsApp">

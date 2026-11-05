@@ -36,7 +36,7 @@ FOOTER_ES = """<footer class="footer">
     </div>
     <div class="container footer__base">
       <p>© Barber Shop Valencia</p>
-      <p><a href="mailto:info@barbershopvalencia.com">info@barbershopvalencia.com</a></p>
+      <p><a href="mailto:infobarbershopvalencia@gmail.com">infobarbershopvalencia@gmail.com</a></p>
     </div>
   </footer>
   <a class="wa" href="https://api.whatsapp.com/send/?phone=34677142958&text&type=phone_number&app_absent=0" target="_blank" rel="noopener" aria-label="WhatsApp">
@@ -307,7 +307,7 @@ POSTS = [
         <h3>Tratamientos faciales</h3>
         <p>Limpieza, exfoliación e hidratación pensadas para la piel masculina.</p>
         <h2>Reserva ahora</h2>
-        <p>Elige tu local favorito y asegura tu hueco. También puedes escribirnos a <a href="mailto:info@barbershopvalencia.com">info@barbershopvalencia.com</a> o por WhatsApp: El Carmen +34 634 456 940, La Petxina +34 677 142 958.</p>
+        <p>Elige tu local favorito y asegura tu hueco. También puedes escribirnos a <a href="mailto:infobarbershopvalencia@gmail.com">infobarbershopvalencia@gmail.com</a> o por WhatsApp: El Carmen +34 634 456 940, La Petxina +34 677 142 958.</p>
         """,
         "body_en": """
         <p>At Barber Shop Valencia your time matters. That is why we offer a <strong>barbershop with appointments in Valencia</strong>: you arrive, sit down, and we work on your cut or beard without unnecessary queues.</p>
@@ -332,7 +332,7 @@ POSTS = [
         <h3>Facial treatments</h3>
         <p>Cleansing, exfoliation and hydration designed for men's skin.</p>
         <h2>Book now</h2>
-        <p>Pick your preferred shop and lock in a slot. You can also email <a href="mailto:info@barbershopvalencia.com">info@barbershopvalencia.com</a> or WhatsApp: El Carmen +34 634 456 940, La Petxina +34 677 142 958.</p>
+        <p>Pick your preferred shop and lock in a slot. You can also email <a href="mailto:infobarbershopvalencia@gmail.com">infobarbershopvalencia@gmail.com</a> or WhatsApp: El Carmen +34 634 456 940, La Petxina +34 677 142 958.</p>
         """,
     },
     {
