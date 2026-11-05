@@ -95,6 +95,7 @@
     });
   }
 
+  mountBlackWeek();
   stampOutboundLinks();
 
   document.addEventListener("click", function (event) {
@@ -245,10 +246,126 @@
     if (link.classList.contains("wa")) return "floating";
     if (link.closest(".nav, header")) return "header";
     if (link.closest("footer, .footer")) return "footer";
-    if (link.closest("#reservar, .cta")) return "cta";
+    if (link.closest("#reservar, .cta, .bf-bar, .bf-deals")) return "cta";
     if (link.closest(".service, .service__actions")) return "service";
     if (link.closest(".hero")) return "hero";
     return "content";
+  }
+
+  function mountBlackWeek() {
+    if (!blackWeekOpen()) {
+      restoreBlackWeekCopy();
+      return;
+    }
+    document.body.classList.add("is-blackweek");
+    var lang = languageCode();
+    var copy = blackWeekCopy();
+    var t = copy[lang] || copy.es;
+    var petxina = "https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia";
+    var bar = document.createElement("div");
+    bar.className = "bf-bar";
+    bar.innerHTML =
+      '<div class="bf-bar__inner container">' +
+        '<p class="bf-bar__copy"><strong>' + t.kicker + '</strong>' +
+        '<span class="bf-bar__dates">' + t.dates + '</span>' +
+        '<span>' + t.text + '</span></p>' +
+        '<div class="bf-bar__actions">' +
+          '<a class="btn btn--primary btn--sm" href="' + petxina + '" target="_blank" rel="noopener">' + t.book + '</a>' +
+        '</div></div>';
+    document.body.insertBefore(bar, document.body.firstChild);
+    function fitBar() {
+      document.body.style.setProperty("--bf-h", bar.offsetHeight + "px");
+    }
+    fitBar();
+    window.addEventListener("resize", fitBar);
+    document.querySelectorAll(".services").forEach(function (list) {
+      var note = document.createElement("p");
+      note.className = "bf-price-note";
+      note.textContent = t.note;
+      list.parentNode.insertBefore(note, list);
+    });
+    document.querySelectorAll(".service__price").forEach(function (price) {
+      var service = price.closest(".service");
+      if (!service || !isPetxinaFullCut(service)) return;
+      var match = price.textContent.match(/(\d+)(?:[.,](\d+))?\s*€/);
+      if (!match) return;
+      var cents = parseInt(match[1], 10) * 100 + (match[2] ? parseInt((match[2] + "00").slice(0, 2), 10) : 0);
+      price.innerHTML =
+        '<span class="service__price-old">' + formatCents(cents) + '</span>' +
+        '<span class="service__price-now service__price-now--flash">20 €</span>' +
+        '<span class="service__flash">' + t.flash + '</span>';
+    });
+  }
+
+  function blackWeekOpen() {
+    var day;
+    try {
+      day = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Madrid", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+    } catch (error) {
+      day = new Date().toISOString().slice(0, 10);
+    }
+    return day <= "2026-11-29";
+  }
+
+  function restoreBlackWeekCopy() {
+    document.querySelectorAll("[data-bf-restore]").forEach(function (el) {
+      if (el.tagName === "META") el.setAttribute("content", el.getAttribute("data-bf-restore"));
+      else el.textContent = el.getAttribute("data-bf-restore");
+    });
+    document.querySelectorAll("[data-bf-restore-href]").forEach(function (el) {
+      el.setAttribute("href", el.getAttribute("data-bf-restore-href"));
+      if ((el.getAttribute("href") || "").charAt(0) === "#") {
+        el.removeAttribute("target");
+        el.removeAttribute("rel");
+      }
+    });
+    document.querySelectorAll(".bf-deals").forEach(function (el) { el.remove(); });
+  }
+
+  function blackWeekCopy() {
+    return {
+      es: {
+        kicker: "Black Week",
+        dates: "23–29 de noviembre",
+        text: "Martes 24 o miércoles 25 de noviembre. Solo La Petxina: corte y barba por 20 €. Plazas limitadas.",
+        book: "Agenda en Booksy La Petxina",
+        flash: "Martes 24 o miércoles 25 · solo La Petxina",
+        note: "Los servicios mantienen el precio de la carta. Del 23 al 29 de noviembre, el 10% es solo en productos de tienda, en La Petxina y en El Carmen. El corte y barba por 20 € es el martes 24 o el miércoles 25, solo en La Petxina."
+      },
+      en: {
+        kicker: "Black Week",
+        dates: "23–29 November",
+        text: "Tuesday 24 or Wednesday 25 November. La Petxina only: haircut and beard for 20 €. Limited slots.",
+        book: "Book on Booksy La Petxina",
+        flash: "Tue 24 or Wed 25 · La Petxina only",
+        note: "Services keep the menu price. From 23 to 29 November, 10% off is only on shop products, at La Petxina and El Carmen. The 20 € haircut and beard is Tuesday 24 or Wednesday 25, at La Petxina only."
+      },
+      ru: {
+        kicker: "Black Week",
+        dates: "23–29 ноября",
+        text: "Вторник 24 или среда 25 ноября. Только La Petxina: стрижка и борода за 20 €. Мест мало.",
+        book: "Запись в Booksy La Petxina",
+        flash: "Вт 24 или ср 25 · только La Petxina",
+        note: "Услуги остаются по цене прайса. С 23 по 29 ноября скидка 10% только на товары салона, в La Petxina и в El Carmen. Стрижка и борода за 20 € — во вторник 24 или в среду 25, только в La Petxina."
+      }
+    };
+  }
+
+  function isPetxinaFullCut(service) {
+    var nameEl = service.querySelector(".service__name");
+    if (!nameEl) return false;
+    var name = nameEl.textContent.replace(/\s+/g, " ").trim().toLowerCase();
+    if (name !== "corte + arreglo de barba" && name !== "cut + beard trim" && name !== "стрижка + борода trim") return false;
+    if (/\/la-petxina(?:\.html|\/|$)/i.test(location.pathname)) return true;
+    var block = service.closest(".shop-block");
+    return !!(block && block.id === "la-petxina");
+  }
+
+  function formatCents(cents) {
+    var euros = Math.floor(cents / 100);
+    var rest = cents % 100;
+    if (rest === 0) return euros + " €";
+    return euros + "," + (rest < 10 ? "0" : "") + rest + " €";
   }
 
   function trackEvent(name, params) {
