@@ -201,6 +201,7 @@
 
   function blackFridayOffer(link) {
     if (!isBlackFridayLink(link)) return "";
+    if (link.closest(".bf-modal")) return "modal";
     if (link.closest(".bf-bar")) return "bar";
     if (link.closest(".bf-deal--flash")) return "corte_20";
     if (link.closest(".bf-deals")) return "productos_10";
@@ -271,6 +272,7 @@
     if (link.classList.contains("wa")) return "floating";
     if (link.closest(".nav, header")) return "header";
     if (link.closest("footer, .footer")) return "footer";
+    if (link.closest(".bf-modal")) return "modal";
     if (link.closest("#reservar, .cta, .bf-bar, .bf-deals")) return "cta";
     if (link.closest(".service, .service__actions")) return "service";
     if (link.closest(".hero")) return "hero";
@@ -320,6 +322,52 @@
         '<span class="service__price-now service__price-now--flash">20 €</span>' +
         '<span class="service__flash">' + t.flash + '</span>';
     });
+    mountBlackFridayModal(t, petxina);
+  }
+
+  function mountBlackFridayModal(t, petxina) {
+    if (!window.matchMedia("(min-width: 960px)").matches) return;
+    try {
+      if (sessionStorage.getItem("bf-modal") === "1") return;
+    } catch (error) {}
+    var carmen = "https://booksy.com/es-es/132769_barber-shop-valencia-el-carmen_barberia_58087_valencia";
+    var modal = document.createElement("div");
+    modal.className = "bf-modal";
+    modal.setAttribute("role", "dialog");
+    modal.setAttribute("aria-modal", "true");
+    modal.setAttribute("aria-labelledby", "bf-modal-title");
+    modal.setAttribute("data-bf-link", "");
+    modal.innerHTML =
+      '<div class="bf-modal__backdrop" data-bf-close></div>' +
+      '<div class="bf-modal__panel">' +
+        '<button type="button" class="bf-modal__close" data-bf-close aria-label="' + t.close + '">×</button>' +
+        '<p class="bf-modal__kicker">' + t.kicker + '</p>' +
+        '<p class="bf-modal__price">20 €</p>' +
+        '<h2 id="bf-modal-title">' + t.modalTitle + '</h2>' +
+        '<p class="bf-modal__when">' + t.modalWhen + '</p>' +
+        '<p class="bf-modal__detail">' + t.modalDetail + '</p>' +
+        '<div class="bf-modal__side"><strong>10%</strong><span>' + t.modalProducts + '</span></div>' +
+        '<div class="bf-modal__actions">' +
+          '<a class="btn btn--primary" href="' + petxina + '" target="_blank" rel="noopener">' + t.book + '</a>' +
+          '<a class="btn btn--ghost" href="' + carmen + '" target="_blank" rel="noopener">' + t.bookCarmen + '</a>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(modal);
+    document.body.classList.add("bf-modal-open");
+    var closeBtn = modal.querySelector(".bf-modal__close");
+    if (closeBtn) closeBtn.focus();
+    function close() {
+      if (!modal.isConnected) return;
+      modal.remove();
+      document.body.classList.remove("bf-modal-open");
+      try { sessionStorage.setItem("bf-modal", "1"); } catch (error) {}
+    }
+    modal.querySelectorAll("[data-bf-close]").forEach(function (el) {
+      el.addEventListener("click", close);
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") close();
+    });
   }
 
   function blackWeekOpen() {
@@ -354,6 +402,12 @@
         dates: "23–29 de noviembre",
         text: "Martes 24 o miércoles 25 de noviembre. Solo La Petxina: corte y barba por 20 €. Plazas limitadas.",
         book: "Agenda en Booksy La Petxina",
+        bookCarmen: "Booksy El Carmen",
+        close: "Cerrar",
+        modalTitle: "Corte y barba, un solo día",
+        modalWhen: "Martes 24 o miércoles 25 de noviembre",
+        modalDetail: "Solo en La Petxina, Juan Llorens 18. Elige un día. Plazas limitadas.",
+        modalProducts: "Del 23 al 29 de noviembre, solo en productos de tienda. La Petxina y El Carmen.",
         flash: "Martes 24 o miércoles 25 · solo La Petxina",
         note: "Los servicios mantienen el precio de la carta. Del 23 al 29 de noviembre, el 10% es solo en productos de tienda, en La Petxina y en El Carmen. El corte y barba por 20 € es el martes 24 o el miércoles 25, solo en La Petxina."
       },
@@ -362,6 +416,12 @@
         dates: "23–29 November",
         text: "Tuesday 24 or Wednesday 25 November. La Petxina only: haircut and beard for 20 €. Limited slots.",
         book: "Book on Booksy La Petxina",
+        bookCarmen: "Booksy El Carmen",
+        close: "Close",
+        modalTitle: "Haircut and beard, one day",
+        modalWhen: "Tuesday 24 or Wednesday 25 November",
+        modalDetail: "La Petxina only, Juan Llorens 18. Pick one day. Limited slots.",
+        modalProducts: "23–29 November, shop products only. La Petxina and El Carmen.",
         flash: "Tue 24 or Wed 25 · La Petxina only",
         note: "Services keep the menu price. From 23 to 29 November, 10% off is only on shop products, at La Petxina and El Carmen. The 20 € haircut and beard is Tuesday 24 or Wednesday 25, at La Petxina only."
       },
@@ -370,6 +430,12 @@
         dates: "23–29 ноября",
         text: "Вторник 24 или среда 25 ноября. Только La Petxina: стрижка и борода за 20 €. Мест мало.",
         book: "Запись в Booksy La Petxina",
+        bookCarmen: "Booksy El Carmen",
+        close: "Закрыть",
+        modalTitle: "Стрижка и борода, один день",
+        modalWhen: "Вторник 24 или среда 25 ноября",
+        modalDetail: "Только La Petxina, Juan Llorens 18. Выберите один день. Мест мало.",
+        modalProducts: "С 23 по 29 ноября, только товары салона. La Petxina и El Carmen.",
         flash: "Вт 24 или ср 25 · только La Petxina",
         note: "Услуги остаются по цене прайса. С 23 по 29 ноября скидка 10% только на товары салона, в La Petxina и в El Carmen. Стрижка и борода за 20 € — во вторник 24 или в среду 25, только в La Petxina."
       }
