@@ -247,10 +247,28 @@ button, input, select, textarea { font: inherit; color: inherit; }
   animation: heroZoom 18s ease-out both;
 }
 
+.hero--carousel .hero__media img {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  animation: heroSlide 30s infinite;
+}
+
+.hero--carousel .hero__media img:first-child {
+  opacity: 1;
+  animation-name: heroSlideFirst;
+}
+
+.hero--carousel .hero__media img:nth-child(2) { animation-delay: 4.8s; }
+.hero--carousel .hero__media img:nth-child(3) { animation-delay: 9.6s; }
+.hero--carousel .hero__media img:nth-child(4) { animation-delay: 14.4s; }
+.hero--carousel .hero__media img:nth-child(5) { animation-delay: 19.2s; }
+
 .hero__media::after {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 1;
   background:
     linear-gradient(to top, rgba(28, 27, 24, 0.62) 0%, rgba(28, 27, 24, 0.22) 46%, rgba(28, 27, 24, 0.08) 100%),
     linear-gradient(90deg, rgba(28, 27, 24, 0.22), transparent 52%);
@@ -789,6 +807,23 @@ button, input, select, textarea { font: inherit; color: inherit; }
 @keyframes heroZoom {
   from { transform: scale(1.08); }
   to { transform: scale(1); }
+}
+
+@keyframes heroSlide {
+  0% { opacity: 0; }
+  4% { opacity: 1; }
+  16% { opacity: 1; }
+  20% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+@keyframes heroSlideFirst {
+  0% { opacity: 1; }
+  16% { opacity: 1; }
+  20% { opacity: 0; }
+  80% { opacity: 0; }
+  84% { opacity: 1; }
+  100% { opacity: 1; }
 }
 
 @keyframes marquee {

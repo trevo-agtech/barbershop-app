@@ -1,38 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://barbershopvalencia.es/es/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="es" href="https://barbershopvalencia.es/es/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://barbershopvalencia.es/en/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://barbershopvalencia.es/ru/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://barbershopvalencia.es/es/" />
+    <image:image>
+      <image:loc>https://barbershopvalencia.es/assets/el-carmen/web/IMG_0860.jpg</image:loc>
+      <image:caption>Interior de Barber Shop Valencia en El Carmen, Valencia</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://barbershopvalencia.es/assets/la-petxina/web/Petxina-59.jpg</image:loc>
+      <image:caption>Corte de pelo en Barber Shop Valencia, La Petxina</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://barbershopvalencia.es/assets/el-carmen/web/IMG_0820.jpg</image:loc>
+      <image:caption>Corte de pelo en Barber Shop Valencia, El Carmen</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://barbershopvalencia.es/assets/la-petxina/web/Petxina-3.jpg</image:loc>
+      <image:caption>Fachada de Barber Shop Valencia en La Petxina, Valencia</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://barbershopvalencia.es/assets/el-carmen/web/IMG_0858.jpg</image:loc>
+      <image:caption>Fachada de Barber Shop Valencia en El Carmen, calle Baja</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://barbershopvalencia.es/en/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="es" href="https://barbershopvalencia.es/es/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://barbershopvalencia.es/en/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://barbershopvalencia.es/ru/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://barbershopvalencia.es/es/" />
+    <image:image>
+      <image:loc>https://barbershopvalencia.es/assets/el-carmen/web/IMG_0860.jpg</image:loc>
+      <image:caption>Interior of Barber Shop Valencia in El Carmen, Valencia</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://barbershopvalencia.es/assets/la-petxina/web/Petxina-59.jpg</image:loc>
+      <image:caption>Haircut at Barber Shop Valencia, La Petxina</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://barbershopvalencia.es/assets/el-carmen/web/IMG_0820.jpg</image:loc>
+      <image:caption>Haircut at Barber Shop Valencia, El Carmen</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://barbershopvalencia.es/assets/la-petxina/web/Petxina-3.jpg</image:loc>
+      <image:caption>Storefront of Barber Shop Valencia in La Petxina, Valencia</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://barbershopvalencia.es/assets/el-carmen/web/IMG_0858.jpg</image:loc>
+      <image:caption>Storefront of Barber Shop Valencia in El Carmen, Calle Baja</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://barbershopvalencia.es/ru/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="es" href="https://barbershopvalencia.es/es/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://barbershopvalencia.es/en/" />
     <xhtml:link rel="alternate" hreflang="ru" href="https://barbershopvalencia.es/ru/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://barbershopvalencia.es/es/" />
+    <image:image>
+      <image:loc>https://barbershopvalencia.es/assets/el-carmen/web/IMG_0860.jpg</image:loc>
+      <image:caption>Интерьер Barber Shop Valencia в Эль Кармене, Валенсия</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://barbershopvalencia.es/assets/la-petxina/web/Petxina-59.jpg</image:loc>
+      <image:caption>Стрижка в Barber Shop Valencia, Ла Петшина</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://barbershopvalencia.es/assets/el-carmen/web/IMG_0820.jpg</image:loc>
+      <image:caption>Стрижка в Barber Shop Valencia, Эль Кармен</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://barbershopvalencia.es/assets/la-petxina/web/Petxina-3.jpg</image:loc>
+      <image:caption>Фасад Barber Shop Valencia в Ла Петшине, Валенсия</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://barbershopvalencia.es/assets/el-carmen/web/IMG_0858.jpg</image:loc>
+      <image:caption>Фасад Barber Shop Valencia в Эль Кармене, улица Baja</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://barbershopvalencia.es/es/el-carmen.html</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="es" href="https://barbershopvalencia.es/es/el-carmen.html" />
@@ -42,7 +102,7 @@
   </url>
   <url>
     <loc>https://barbershopvalencia.es/en/el-carmen.html</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="es" href="https://barbershopvalencia.es/es/el-carmen.html" />
@@ -52,7 +112,7 @@
   </url>
   <url>
     <loc>https://barbershopvalencia.es/ru/el-carmen.html</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="es" href="https://barbershopvalencia.es/es/el-carmen.html" />
@@ -243,7 +303,7 @@
   <url>
     <loc>https://barbershopvalencia.es/es/blog/halloween-valencia-barberia-el-carmen-la-petxina.html</loc>
     <lastmod>2026-10-26</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>yearly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="es" href="https://barbershopvalencia.es/es/blog/halloween-valencia-barberia-el-carmen-la-petxina.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://barbershopvalencia.es/en/blog/halloween-valencia-barbershop-el-carmen-la-petxina.html" />
@@ -253,7 +313,7 @@
   <url>
     <loc>https://barbershopvalencia.es/en/blog/halloween-valencia-barbershop-el-carmen-la-petxina.html</loc>
     <lastmod>2026-10-26</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>yearly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="es" href="https://barbershopvalencia.es/es/blog/halloween-valencia-barberia-el-carmen-la-petxina.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://barbershopvalencia.es/en/blog/halloween-valencia-barbershop-el-carmen-la-petxina.html" />
@@ -263,7 +323,7 @@
   <url>
     <loc>https://barbershopvalencia.es/ru/blog/halloween-valensiya-barbershop-el-carmen-la-petxina.html</loc>
     <lastmod>2026-10-26</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>yearly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="es" href="https://barbershopvalencia.es/es/blog/halloween-valencia-barberia-el-carmen-la-petxina.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://barbershopvalencia.es/en/blog/halloween-valencia-barbershop-el-carmen-la-petxina.html" />
