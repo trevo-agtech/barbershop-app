@@ -9,7 +9,9 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = "https://barbershopvalencia.es"
 
 from analytics import ensure_gtag  # noqa: E402
-BOOKSY_PETXINA = "https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia"
+AGENDA = "https://agenda.barbershopvalencia.es/"
+AGENDA_PETXINA = "https://agenda.barbershopvalencia.es/?local=la-petxina"
+AGENDA_CARMEN = "https://agenda.barbershopvalencia.es/?local=el-carmen"
 WA = "https://api.whatsapp.com/send/?phone=34677142958&text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%B2%20Barber%20Shop%20Valencia%20La%20Petxina.&type=phone_number&app_absent=0"
 
 FOOTER = """<footer class="footer">
@@ -21,7 +23,7 @@ FOOTER = """<footer class="footer">
         <a href="https://www.instagram.com/barbershopvalencia_/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm5 4.2A4.8 4.8 0 1 0 16.8 12 4.8 4.8 0 0 0 12 7.2zm6.3-.8a1.15 1.15 0 1 0 1.15 1.15A1.15 1.15 0 0 0 18.3 6.4zM12 9.1A2.9 2.9 0 1 1 9.1 12 2.9 2.9 0 0 1 12 9.1z"/></svg></a>
         <a href="https://www.tiktok.com/search?q=Barber%20Shop%20Valencia" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.2 3h2.3a5.2 5.2 0 0 0 3.4 3.2v2.3a7.4 7.4 0 0 1-3.4-1.1v7.1a6 6 0 1 1-6-6c.3 0 .7 0 1 .1v2.5a3.5 3.5 0 1 0 2.5 3.4V3z"/></svg></a>
         <a href="https://www.facebook.com/barbershop.valencia.9" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.2 8.5H17V5.4h-2.8c-2.3 0-4.1 1.8-4.1 4.1v2H8v3.1h2.1V21h3.2v-6.4h2.7l.4-3.1h-3.1v-1.6c0-.7.4-1.4 1.4-1.4z"/></svg></a>
-        <a href="https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia" target="_blank" rel="noopener" aria-label="Booksy"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2.8h2.1V5h5.8V2.8H17V5h1.6A2.4 2.4 0 0 1 21 7.4V19a2.4 2.4 0 0 1-2.4 2.4H5.4A2.4 2.4 0 0 1 3 19V7.4A2.4 2.4 0 0 1 5.4 5H7zm12 7.2H5v9h14z"/></svg></a>
+        <a href="https://agenda.barbershopvalencia.es/" aria-label="Запись"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2.8h2.1V5h5.8V2.8H17V5h1.6A2.4 2.4 0 0 1 21 7.4V19a2.4 2.4 0 0 1-2.4 2.4H5.4A2.4 2.4 0 0 1 3 19V7.4A2.4 2.4 0 0 1 5.4 5H7zm12 7.2H5v9h14z"/></svg></a>
       </div>
       </div>
       <div>
@@ -85,7 +87,7 @@ POSTS = [
         <h2>Запись в La Petxina (открыта 9 октября)</h2>
         <p>В этот день <strong>работает только La Petxina</strong>, C/ Juan Llorens 18. El Carmen закрыт.</p>
         <p>
-          <a class="btn btn--primary" href="{BOOKSY_PETXINA}" target="_blank" rel="noopener">Запись · La Petxina (Booksy)</a>
+          <a class="btn btn--primary" href="{AGENDA_PETXINA}">Запись · La Petxina</a>
           <a class="btn btn--ghost" href="{WA}" target="_blank" rel="noopener">WhatsApp</a>
         </p>
         """,
@@ -217,7 +219,7 @@ def nav(slug: str | None = None) -> str:
         <a href="{en_href}" hreflang="en">EN</a>
         <a class="is-active" href="{ru_href}" hreflang="ru">RU</a>
       </div>
-      <a class="btn btn--ghost" href="{BOOKSY_PETXINA}" target="_blank" rel="noopener">Booksy</a>
+      <a class="btn btn--ghost" href="{AGENDA}">Запись</a>
       <a class="btn btn--primary" href="https://api.whatsapp.com/send/?phone=34677142958&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">WhatsApp</a>
     </nav>
   </header>
@@ -345,10 +347,12 @@ def write_posts() -> None:
       </div>
       <div class="blog-post__cta">
         <h2>Запишитесь</h2>
-        <p>Выберите El Carmen или La Petxina и запишитесь через Booksy или WhatsApp.</p>
+        <p>Выберите El Carmen или La Petxina и запишитесь через нашу запись или WhatsApp.</p>
         <div class="cta__actions cta__actions--stack">
-          <a class="btn btn--primary" href="https://booksy.com/es-es/132769_barber-shop-valencia-el-carmen_barberia_58087_valencia" target="_blank" rel="noopener">Запись El Carmen</a>
-          <a class="btn btn--ghost" href="{BOOKSY_PETXINA}" target="_blank" rel="noopener">Запись La Petxina</a>
+          <a class="btn btn--primary" href="{AGENDA_CARMEN}" data-ga-channel="agenda">Запись El Carmen</a>
+          <a class="btn btn--ghost" href="https://booksy.com/es-es/132769_barber-shop-valencia-el-carmen_barberia_58087_valencia" target="_blank" rel="noopener" data-ga-channel="booksy">Booksy El Carmen</a>
+          <a class="btn btn--ghost" href="{AGENDA_PETXINA}" data-ga-channel="agenda">Запись La Petxina</a>
+          <a class="btn btn--ghost" href="https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia" target="_blank" rel="noopener" data-ga-channel="booksy">Booksy La Petxina</a>
           <a class="btn btn--ghost" href="https://api.whatsapp.com/send/?phone=34634456940&text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%B2%20Barber%20Shop%20Valencia%20El%20Carmen.&type=phone_number&app_absent=0" target="_blank" rel="noopener">WhatsApp El Carmen</a>
           <a class="btn btn--ghost" href="https://api.whatsapp.com/send/?phone=34677142958&text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%B2%20Barber%20Shop%20Valencia%20La%20Petxina.&type=phone_number&app_absent=0" target="_blank" rel="noopener">WhatsApp La Petxina</a>
         </div>

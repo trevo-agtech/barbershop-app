@@ -260,6 +260,7 @@ def add_lang_switch(html: str, lang: str, es_page: str) -> str:
     # Insert before first ghost/primary booking button in nav
     for marker in (
         '<a class="btn btn--ghost" href="#reservar">',
+        '<a class="btn btn--ghost" href="https://agenda.barbershopvalencia.es',
         '<a class="btn btn--ghost" href="https://booksy.com',
         '<a class="btn btn--primary" href="https://api.whatsapp.com',
     ):

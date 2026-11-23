@@ -18,7 +18,7 @@ FOOTER_ES = """<footer class="footer">
         <a href="https://www.instagram.com/barbershopvalencia_/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm5 4.2A4.8 4.8 0 1 0 16.8 12 4.8 4.8 0 0 0 12 7.2zm6.3-.8a1.15 1.15 0 1 0 1.15 1.15A1.15 1.15 0 0 0 18.3 6.4zM12 9.1A2.9 2.9 0 1 1 9.1 12 2.9 2.9 0 0 1 12 9.1z"/></svg></a>
         <a href="https://www.tiktok.com/search?q=Barber%20Shop%20Valencia" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.2 3h2.3a5.2 5.2 0 0 0 3.4 3.2v2.3a7.4 7.4 0 0 1-3.4-1.1v7.1a6 6 0 1 1-6-6c.3 0 .7 0 1 .1v2.5a3.5 3.5 0 1 0 2.5 3.4V3z"/></svg></a>
         <a href="https://www.facebook.com/barbershop.valencia.9" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.2 8.5H17V5.4h-2.8c-2.3 0-4.1 1.8-4.1 4.1v2H8v3.1h2.1V21h3.2v-6.4h2.7l.4-3.1h-3.1v-1.6c0-.7.4-1.4 1.4-1.4z"/></svg></a>
-        <a href="https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia" target="_blank" rel="noopener" aria-label="Booksy"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2.8h2.1V5h5.8V2.8H17V5h1.6A2.4 2.4 0 0 1 21 7.4V19a2.4 2.4 0 0 1-2.4 2.4H5.4A2.4 2.4 0 0 1 3 19V7.4A2.4 2.4 0 0 1 5.4 5H7zm12 7.2H5v9h14z"/></svg></a>
+        <a href="https://agenda.barbershopvalencia.es/" aria-label="Reservar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2.8h2.1V5h5.8V2.8H17V5h1.6A2.4 2.4 0 0 1 21 7.4V19a2.4 2.4 0 0 1-2.4 2.4H5.4A2.4 2.4 0 0 1 3 19V7.4A2.4 2.4 0 0 1 5.4 5H7zm12 7.2H5v9h14z"/></svg></a>
       </div>
       </div>
       <div>
@@ -50,7 +50,7 @@ FOOTER_ES = """<footer class="footer">
 FOOTER_EN = FOOTER_ES.replace(
     "Dos barberías en Valencia. Cortes, barba y cuidado masculino con un equipo que cuida el detalle.",
     "Two barbershops in Valencia. Haircuts, beard work and men's grooming with a team that minds the details.",
-).replace('aria-label="Redes sociales"', 'aria-label="Social networks"').replace("España", "Spain")
+).replace('aria-label="Redes sociales"', 'aria-label="Social networks"').replace('aria-label="Reservar"', 'aria-label="Book"').replace("España", "Spain")
 
 
 def nav(lang: str, active: str = "blog") -> str:
@@ -103,14 +103,16 @@ def nav(lang: str, active: str = "blog") -> str:
         <a{(' class="is-active"' if lang == "es" else "")} href="{es_blog}" hreflang="es">ES</a>
         <a{(' class="is-active"' if lang == "en" else "")} href="{en_blog}" hreflang="en">EN</a>
       </div>
-      <a class="btn btn--ghost" href="https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia" target="_blank" rel="noopener">Booksy</a>
+      <a class="btn btn--ghost" href="https://agenda.barbershopvalencia.es/">{"Reservar" if lang == "es" else "Book"}</a>
       <a class="btn btn--primary" href="https://api.whatsapp.com/send/?phone=34677142958&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">WhatsApp</a>
     </nav>
   </header>
 """
 
 
-BOOKSY_PETXINA = "https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia"
+AGENDA = "https://agenda.barbershopvalencia.es/"
+AGENDA_PETXINA = "https://agenda.barbershopvalencia.es/?local=la-petxina"
+AGENDA_CARMEN = "https://agenda.barbershopvalencia.es/?local=el-carmen"
 WA_PETXINA_ES = "https://api.whatsapp.com/send/?phone=34677142958&text=Hola%2C%20quiero%20reservar%20el%209%20de%20octubre%20en%20Barber%20Shop%20Valencia%20La%20Petxina.&type=phone_number&app_absent=0"
 WA_PETXINA_EN = "https://api.whatsapp.com/send/?phone=34677142958&text=Hi%2C%20I%20want%20to%20book%20on%209%20October%20at%20Barber%20Shop%20Valencia%20La%20Petxina.&type=phone_number&app_absent=0"
 
@@ -134,7 +136,7 @@ POSTS = [
         <h2>Reserva tu corte en La Petxina (9 de octubre)</h2>
         <p><strong>La Petxina estará abierta</strong> este feriado. <strong>El Carmen permanecerá cerrado</strong>. Reserva tu hueco en C/ Juan Llorens 18.</p>
         <div class="cta__actions cta__actions--stack">
-          <a class="btn btn--primary" href="{BOOKSY_PETXINA}" target="_blank" rel="noopener">Reservar en Booksy · La Petxina</a>
+          <a class="btn btn--primary" href="{AGENDA_PETXINA}">Reservar · La Petxina</a>
           <a class="btn btn--ghost" href="{WA_PETXINA_ES}" target="_blank" rel="noopener">WhatsApp La Petxina</a>
           <a class="btn btn--ghost" href="../la-petxina.html">Ver tienda La Petxina</a>
         </div>
@@ -143,7 +145,7 @@ POSTS = [
         <h2>Book your cut at La Petxina (9 October)</h2>
         <p><strong>La Petxina will be open</strong> on this holiday. <strong>El Carmen will stay closed</strong>. Book your slot at C/ Juan Llorens 18.</p>
         <div class="cta__actions cta__actions--stack">
-          <a class="btn btn--primary" href="{BOOKSY_PETXINA}" target="_blank" rel="noopener">Book on Booksy · La Petxina</a>
+          <a class="btn btn--primary" href="{AGENDA_PETXINA}">Book · La Petxina</a>
           <a class="btn btn--ghost" href="{WA_PETXINA_EN}" target="_blank" rel="noopener">WhatsApp La Petxina</a>
           <a class="btn btn--ghost" href="../la-petxina.html">View La Petxina shop</a>
         </div>
@@ -173,7 +175,7 @@ POSTS = [
         <h2>Reserva en La Petxina (abierta el 9 de octubre)</h2>
         <p>Este 9 de octubre <strong>solo abre La Petxina</strong>, en C/ Juan Llorens 18. El Carmen permanecerá cerrado.</p>
         <p>
-          <a class="btn btn--primary" href="{BOOKSY_PETXINA}" target="_blank" rel="noopener">Reservar corte · La Petxina (Booksy)</a>
+          <a class="btn btn--primary" href="{AGENDA_PETXINA}">Reservar corte · La Petxina</a>
           <a class="btn btn--ghost" href="{WA_PETXINA_ES}" target="_blank" rel="noopener">WhatsApp</a>
         </p>
         <p>Dirección: <a href="https://www.google.com/maps/search/?api=1&query=C%2F+Juan+Llorens+18%2C+46008+Valencia" target="_blank" rel="noopener">C/ Juan Llorens 18, 46008 Valencia</a>. Más info en la página de <a href="../la-petxina.html">La Petxina</a>.</p>
@@ -203,7 +205,7 @@ POSTS = [
         <h2>Book at La Petxina (open on 9 October)</h2>
         <p>On 9 October <strong>only La Petxina is open</strong>, at C/ Juan Llorens 18. El Carmen will remain closed.</p>
         <p>
-          <a class="btn btn--primary" href="{BOOKSY_PETXINA}" target="_blank" rel="noopener">Book cut · La Petxina (Booksy)</a>
+          <a class="btn btn--primary" href="{AGENDA_PETXINA}">Book cut · La Petxina</a>
           <a class="btn btn--ghost" href="{WA_PETXINA_EN}" target="_blank" rel="noopener">WhatsApp</a>
         </p>
         <p>Address: <a href="https://www.google.com/maps/search/?api=1&query=C%2F+Juan+Llorens+18%2C+46008+Valencia" target="_blank" rel="noopener">C/ Juan Llorens 18, 46008 Valencia</a>. More on the <a href="../la-petxina.html">La Petxina page</a>.</p>
@@ -673,20 +675,24 @@ def write_post(lang: str, p: dict) -> None:
     else:
         cta_title = "Reserva tu cita" if is_es else "Book your appointment"
         cta_text = (
-            "Elige El Carmen o La Petxina y reserva por Booksy o WhatsApp."
+            "Elige El Carmen o La Petxina y reserva en la agenda o por WhatsApp."
             if is_es
-            else "Choose El Carmen or La Petxina and book on Booksy or WhatsApp."
+            else "Choose El Carmen or La Petxina and book on the agenda or WhatsApp."
         )
-        book_el = "Reservar El Carmen" if is_es else "Book El Carmen"
-        book_pet = "Reservar La Petxina" if is_es else "Book La Petxina"
+        book_el = "Agendar El Carmen" if is_es else "Book El Carmen"
+        book_pet = "Agendar La Petxina" if is_es else "Book La Petxina"
+        booksy_el = "https://booksy.com/es-es/132769_barber-shop-valencia-el-carmen_barberia_58087_valencia"
+        booksy_pet = "https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia"
         wa_el = "Hola%2C%20quiero%20reservar%20en%20Barber%20Shop%20Valencia%20El%20Carmen." if is_es else "Hi%2C%20I%20want%20to%20book%20at%20Barber%20Shop%20Valencia%20El%20Carmen."
         wa_pet = "Hola%2C%20quiero%20reservar%20en%20Barber%20Shop%20Valencia%20La%20Petxina." if is_es else "Hi%2C%20I%20want%20to%20book%20at%20Barber%20Shop%20Valencia%20La%20Petxina."
         cta_block = f"""<div class="blog-post__cta">
         <h2>{cta_title}</h2>
         <p>{cta_text}</p>
         <div class="cta__actions cta__actions--stack">
-          <a class="btn btn--primary" href="https://booksy.com/es-es/132769_barber-shop-valencia-el-carmen_barberia_58087_valencia" target="_blank" rel="noopener">{book_el}</a>
-          <a class="btn btn--ghost" href="https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia" target="_blank" rel="noopener">{book_pet}</a>
+          <a class="btn btn--primary" href="{AGENDA_CARMEN}" data-ga-channel="agenda">{book_el}</a>
+          <a class="btn btn--ghost" href="{booksy_el}" target="_blank" rel="noopener" data-ga-channel="booksy">Booksy El Carmen</a>
+          <a class="btn btn--ghost" href="{AGENDA_PETXINA}" data-ga-channel="agenda">{book_pet}</a>
+          <a class="btn btn--ghost" href="{booksy_pet}" target="_blank" rel="noopener" data-ga-channel="booksy">Booksy La Petxina</a>
           <a class="btn btn--ghost" href="https://api.whatsapp.com/send/?phone=34634456940&text={wa_el}&type=phone_number&app_absent=0" target="_blank" rel="noopener">WhatsApp El Carmen</a>
           <a class="btn btn--ghost" href="https://api.whatsapp.com/send/?phone=34677142958&text={wa_pet}&type=phone_number&app_absent=0" target="_blank" rel="noopener">WhatsApp La Petxina</a>
         </div>

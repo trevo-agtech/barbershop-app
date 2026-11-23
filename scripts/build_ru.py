@@ -262,6 +262,7 @@ def apply_switch_and_hreflang(html: str, lang: str, page_file: str) -> str:
     switch = lang_switch(lang, page_file)
     for marker in (
         '<a class="btn btn--ghost" href="#reservar">',
+        '<a class="btn btn--ghost" href="https://agenda.barbershopvalencia.es',
         '<a class="btn btn--ghost" href="https://booksy.com',
         '<a class="btn btn--primary" href="https://api.whatsapp.com',
     ):

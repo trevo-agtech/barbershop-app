@@ -1,4 +1,66 @@
 (function () {
+  function channelOf(href) {
+    if (/agenda\.barbershopvalencia\.es/i.test(href)) return "agenda";
+    if (/booksy\.com/i.test(href)) return "booksy";
+    if (/whatsapp\.com|wa\.me/i.test(href)) return "whatsapp";
+    if (/instagram\.com/i.test(href)) return "instagram";
+    if (/facebook\.com|fb\.com/i.test(href)) return "facebook";
+    if (/tiktok\.com/i.test(href)) return "tiktok";
+    if (/google\.com\/maps|maps\.google|goo\.gl\/maps/i.test(href)) return "maps";
+    if (/^mailto:/i.test(href)) return "email";
+    return "";
+  }
+
+  function isBookingChannel(channel) {
+    return channel === "agenda" || channel === "booksy" || channel === "whatsapp";
+  }
+
+  function isReserveCta(href, label) {
+    if (/^#(reservar|tiendas)\b/i.test(href)) return true;
+    if (/agenda\.barbershopvalencia\.es|booksy\.com/i.test(href)) return true;
+    if (/whatsapp\.com|wa\.me/i.test(href) && /reserv|agendar|book|запис|whatsapp/i.test(label)) return true;
+    return /reserv|agendar|\bbook\b|запис/i.test(label);
+  }
+
+  function shopFrom(href, label, pathname) {
+    var page = pathname != null ? pathname : location.pathname;
+    var clean = String(href || "").replace(/[?&](?:utm_[a-z]+|utc)=[^&#]*/gi, "");
+    var hay = (clean + " " + label).toLowerCase();
+    var carmen = /local=el-carmen|local=carmen\b|el[- ]carmen|132769|34634456940/.test(hay);
+    var petxinaLink = /local=la-petxina|local=petxina\b|petxina|12979/.test(hay);
+    var defaultWhatsapp = /34677142958/.test(hay) && !petxinaLink;
+    if (carmen && !petxinaLink) return "el_carmen";
+    if (petxinaLink && !carmen) return "la_petxina";
+    if (defaultWhatsapp) {
+      if (/\/la-petxina(?:\.html|\/|$)/i.test(page)) return "la_petxina";
+      if (/\/el-carmen(?:\.html|\/|$)/i.test(page)) return "el_carmen";
+      return "general";
+    }
+    if (/juan(?:\s|\+|%20)*llorens/.test(hay)) return "la_petxina";
+    if (/google\.com\/maps|maps\.google/.test(hay) && /baja/.test(hay)) return "el_carmen";
+    if (/\/el-carmen(?:\.html|\/|$)/i.test(page)) return "el_carmen";
+    if (/\/la-petxina(?:\.html|\/|$)/i.test(page)) return "la_petxina";
+    return "general";
+  }
+
+  function bookingTags(href, label, pathname, blackFriday) {
+    var channel = channelOf(href);
+    var shop = shopFrom(href, label, pathname);
+    return {
+      channel: channel,
+      shop: shop,
+      medium: isBookingChannel(channel) ? channel : "",
+      campaign: blackFriday ? "black_friday" : (isBookingChannel(channel) ? "reservar" : (channel || "reservar")),
+      reserve: isReserveCta(href, label)
+    };
+  }
+
+  if (typeof module !== "undefined" && module.exports) {
+    module.exports = { channelOf: channelOf, shopFrom: shopFrom, isReserveCta: isReserveCta, isBookingChannel: isBookingChannel, bookingTags: bookingTags };
+  }
+
+  if (typeof document === "undefined") return;
+
   var host = location.hostname.toLowerCase();
   var path = location.pathname.replace(/index\.html$/i, "");
   if (host === "barbershopvalencia.com" || host === "www.barbershopvalencia.com" || host === "www.barbershopvalencia.es") {
@@ -107,7 +169,7 @@
       if (!/^#(reservar|tiendas)\b/i.test(href)) return;
     }
     var label = linkLabel(link);
-    var channel = channelOf(href);
+    var channel = link.dataset.gaChannel || channelOf(href);
     var reservar = isReserveCta(href, label);
     if (!channel && !reservar) return;
 
@@ -123,6 +185,11 @@
       if (params.shop === "el_carmen") trackEvent("click_booksy_el_carmen", params);
       if (params.shop === "la_petxina") trackEvent("click_booksy_la_petxina", params);
     }
+    if (channel === "agenda") {
+      trackEvent("click_agenda", params);
+      if (params.shop === "el_carmen") trackEvent("click_agenda_el_carmen", params);
+      if (params.shop === "la_petxina") trackEvent("click_agenda_la_petxina", params);
+    }
     if (channel === "instagram") trackEvent("click_instagram", params);
     if (channel === "facebook") trackEvent("click_facebook", params);
     if (channel === "tiktok") trackEvent("click_tiktok", params);
@@ -136,6 +203,16 @@
     if (reservar) {
       params.channel = channel || "page";
       trackEvent("click_reservar", params);
+    }
+    if (isBookingChannel(channel)) {
+      trackEvent("booking_click", {
+        booking_method: channel,
+        shop: params.shop,
+        placement: params.placement,
+        language: params.language,
+        page_path: params.page_path,
+        link_url: href
+      });
     }
   });
 
@@ -157,11 +234,13 @@
     var shop = shopFrom(href, label);
     var campaign = campaignOf(link, channel);
     var utc = utcCode(link, href, channel);
+    var booking = isBookingChannel(channel);
+    if (!link.dataset.gaChannel) link.dataset.gaChannel = channel;
     try {
       var url = new URL(href, location.href);
       if (!url.searchParams.has("utm_source")) {
         url.searchParams.set("utm_source", "website");
-        url.searchParams.set("utm_medium", placement);
+        url.searchParams.set("utm_medium", booking ? channel : placement);
         url.searchParams.set("utm_campaign", campaign);
         url.searchParams.set("utm_content", shop);
         url.searchParams.set("utm_term", pageCode());
@@ -182,7 +261,7 @@
       page_path: location.pathname,
       language: languageCode(),
       utm_source: "website",
-      utm_medium: placementOf(link),
+      utm_medium: isBookingChannel(channel) ? channel : placementOf(link),
       utm_campaign: campaignOf(link, channel),
       utm_content: shopFrom(href, label),
       utm_term: pageCode(),
@@ -196,7 +275,9 @@
   }
 
   function campaignOf(link, channel) {
-    return isBlackFridayLink(link) ? "black_friday" : (channel || "reservar");
+    if (isBlackFridayLink(link)) return "black_friday";
+    if (isBookingChannel(channel)) return "reservar";
+    return channel || "reservar";
   }
 
   function blackFridayOffer(link) {
@@ -215,17 +296,6 @@
     return parts.join("_");
   }
 
-  function channelOf(href) {
-    if (/booksy\.com/i.test(href)) return "booksy";
-    if (/whatsapp\.com|wa\.me/i.test(href)) return "whatsapp";
-    if (/instagram\.com/i.test(href)) return "instagram";
-    if (/facebook\.com|fb\.com/i.test(href)) return "facebook";
-    if (/tiktok\.com/i.test(href)) return "tiktok";
-    if (/google\.com\/maps|maps\.google|goo\.gl\/maps/i.test(href)) return "maps";
-    if (/^mailto:/i.test(href)) return "email";
-    return "";
-  }
-
   function languageCode() {
     return (document.documentElement.lang || "es").slice(0, 2).toLowerCase();
   }
@@ -240,32 +310,6 @@
     var text = (link.textContent || "").replace(/\s+/g, " ").trim();
     if (text) return text;
     return (link.getAttribute("aria-label") || "").replace(/\s+/g, " ").trim();
-  }
-
-  function isReserveCta(href, label) {
-    if (/^#(reservar|tiendas)\b/i.test(href)) return true;
-    if (!label || /^booksy$/i.test(label)) return false;
-    return /reserv|\bbook\b|запис/i.test(label);
-  }
-
-  function shopFrom(href, label) {
-    var clean = String(href || "").replace(/[?&](?:utm_[a-z]+|utc)=[^&#]*/gi, "");
-    var hay = (clean + " " + label).toLowerCase();
-    var carmen = /el[- ]carmen|132769|34634456940/.test(hay);
-    var petxinaLink = /petxina|12979/.test(hay);
-    var defaultWhatsapp = /34677142958/.test(hay) && !petxinaLink;
-    if (carmen && !petxinaLink) return "el_carmen";
-    if (petxinaLink && !carmen) return "la_petxina";
-    if (defaultWhatsapp) {
-      if (/\/la-petxina(?:\.html|\/|$)/i.test(location.pathname)) return "la_petxina";
-      if (/\/el-carmen(?:\.html|\/|$)/i.test(location.pathname)) return "el_carmen";
-      return "general";
-    }
-    if (/juan(?:\s|\+|%20)*llorens/.test(hay)) return "la_petxina";
-    if (/google\.com\/maps|maps\.google/.test(hay) && /baja/.test(hay)) return "el_carmen";
-    if (/\/el-carmen(?:\.html|\/|$)/i.test(location.pathname)) return "el_carmen";
-    if (/\/la-petxina(?:\.html|\/|$)/i.test(location.pathname)) return "la_petxina";
-    return "general";
   }
 
   function placementOf(link) {
@@ -288,7 +332,9 @@
     var lang = languageCode();
     var copy = blackWeekCopy();
     var t = copy[lang] || copy.es;
-    var petxina = "https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia";
+    var petxina = "https://agenda.barbershopvalencia.es/?local=la-petxina";
+    var booksyPetxina = "https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia";
+    var whatsappPetxina = "https://api.whatsapp.com/send/?phone=34677142958&text=" + encodeURIComponent(t.whatsappText) + "&type=phone_number&app_absent=0";
     var bar = document.createElement("div");
     bar.className = "bf-bar";
     bar.innerHTML =
@@ -297,7 +343,9 @@
         '<span class="bf-bar__dates">' + t.dates + '</span>' +
         '<span>' + t.text + '</span></p>' +
         '<div class="bf-bar__actions">' +
-          '<a class="btn btn--primary btn--sm" href="' + petxina + '" target="_blank" rel="noopener">' + t.book + '</a>' +
+          '<a class="btn btn--primary btn--sm" href="' + petxina + '" data-ga-channel="agenda">' + t.book + '</a>' +
+          '<a class="btn btn--ghost btn--sm" href="' + booksyPetxina + '" target="_blank" rel="noopener" data-ga-channel="booksy">' + t.booksy + '</a>' +
+          '<a class="btn btn--ghost btn--sm" href="' + whatsappPetxina + '" target="_blank" rel="noopener" data-ga-channel="whatsapp">' + t.whatsapp + '</a>' +
         '</div></div>';
     document.body.insertBefore(bar, document.body.firstChild);
     function fitBar() {
@@ -330,7 +378,9 @@
     try {
       if (sessionStorage.getItem("bf-modal") === "1") return;
     } catch (error) {}
-    var carmen = "https://booksy.com/es-es/132769_barber-shop-valencia-el-carmen_barberia_58087_valencia";
+    var carmen = "https://agenda.barbershopvalencia.es/?local=el-carmen";
+    var booksyPetxina = "https://booksy.com/es-es/12979_barber-shop-valencia_barberia_58087_valencia";
+    var whatsappPetxina = "https://api.whatsapp.com/send/?phone=34677142958&text=" + encodeURIComponent(t.whatsappText) + "&type=phone_number&app_absent=0";
     var modal = document.createElement("div");
     modal.className = "bf-modal";
     modal.setAttribute("role", "dialog");
@@ -348,8 +398,10 @@
         '<p class="bf-modal__detail">' + t.modalDetail + '</p>' +
         '<div class="bf-modal__side"><strong>10%</strong><span>' + t.modalProducts + '</span></div>' +
         '<div class="bf-modal__actions">' +
-          '<a class="btn btn--primary" href="' + petxina + '" target="_blank" rel="noopener">' + t.book + '</a>' +
-          '<a class="btn btn--ghost" href="' + carmen + '" target="_blank" rel="noopener">' + t.bookCarmen + '</a>' +
+          '<a class="btn btn--primary" href="' + petxina + '" data-ga-channel="agenda">' + t.book + '</a>' +
+          '<a class="btn btn--ghost" href="' + booksyPetxina + '" target="_blank" rel="noopener" data-ga-channel="booksy">' + t.booksy + '</a>' +
+          '<a class="btn btn--ghost" href="' + whatsappPetxina + '" target="_blank" rel="noopener" data-ga-channel="whatsapp">' + t.whatsapp + '</a>' +
+          '<a class="btn btn--ghost" href="' + carmen + '" data-ga-channel="agenda">' + t.bookCarmen + '</a>' +
         '</div>' +
       '</div>';
     document.body.appendChild(modal);
@@ -401,8 +453,11 @@
         kicker: "Black Week",
         dates: "23–29 de noviembre",
         text: "Martes 24 o miércoles 25 de noviembre. Solo La Petxina: corte y barba por 20 €. Plazas limitadas.",
-        book: "Agenda en Booksy La Petxina",
-        bookCarmen: "Booksy El Carmen",
+        book: "Agendar La Petxina",
+        booksy: "Booksy",
+        whatsapp: "WhatsApp",
+        whatsappText: "Hola, quiero reservar en Barber Shop Valencia La Petxina.",
+        bookCarmen: "Agendar El Carmen",
         close: "Cerrar",
         modalTitle: "Corte y barba, un solo día",
         modalWhen: "Martes 24 o miércoles 25 de noviembre",
@@ -415,8 +470,11 @@
         kicker: "Black Week",
         dates: "23–29 November",
         text: "Tuesday 24 or Wednesday 25 November. La Petxina only: haircut and beard for 20 €. Limited slots.",
-        book: "Book on Booksy La Petxina",
-        bookCarmen: "Booksy El Carmen",
+        book: "Book La Petxina",
+        booksy: "Booksy",
+        whatsapp: "WhatsApp",
+        whatsappText: "Hi, I want to book at Barber Shop Valencia La Petxina.",
+        bookCarmen: "Book El Carmen",
         close: "Close",
         modalTitle: "Haircut and beard, one day",
         modalWhen: "Tuesday 24 or Wednesday 25 November",
@@ -429,8 +487,11 @@
         kicker: "Black Week",
         dates: "23–29 ноября",
         text: "Вторник 24 или среда 25 ноября. Только La Petxina: стрижка и борода за 20 €. Мест мало.",
-        book: "Запись в Booksy La Petxina",
-        bookCarmen: "Booksy El Carmen",
+        book: "Запись La Petxina",
+        booksy: "Booksy",
+        whatsapp: "WhatsApp",
+        whatsappText: "Здравствуйте, хочу записаться в Barber Shop Valencia La Petxina.",
+        bookCarmen: "Запись El Carmen",
         close: "Закрыть",
         modalTitle: "Стрижка и борода, один день",
         modalWhen: "Вторник 24 или среда 25 ноября",
