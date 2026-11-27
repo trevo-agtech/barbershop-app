@@ -839,7 +839,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
     align-items: center;
     gap: 1.25rem;
   }
-  .hours-grid { grid-template-columns: repeat(2, 1fr); }
+  .hours-grid { grid-template-columns: repeat(3, 1fr); }
   .locations { grid-template-columns: 1fr 1fr; gap: 1rem; }
   .team { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
   .gallery { grid-template-columns: repeat(3, 1fr); }
@@ -946,6 +946,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 18%;
   transition: transform 0.45s ease;
 }
 
@@ -1013,6 +1014,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   width: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
+  object-position: center 18%;
 }
 
 .bf-photos {
@@ -1033,6 +1035,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+  object-position: center 18%;
 }
 
 .bf-photos figcaption {
@@ -1485,4 +1488,99 @@ body.bf-modal-open { overflow: hidden; }
     z-index: 80;
     padding: 2rem;
   }
+}
+
+body.is-christmas { --xmas-h: 3.2rem; }
+
+body.is-christmas .nav { top: var(--xmas-h); }
+
+body.is-christmas .hero__content { padding-top: calc(7.5rem + var(--xmas-h)); }
+
+body.is-christmas .blog-hero { padding-top: calc(8rem + var(--xmas-h)); }
+
+body.is-christmas .blog-post.section { padding-top: calc(5.5rem + var(--xmas-h)); }
+
+body.is-christmas .section[style*="padding-top:8rem"] {
+  padding-top: calc(8rem + var(--xmas-h)) !important;
+}
+
+.xmas-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  background: #143028;
+  color: #f7f6f3;
+  border-bottom: 2px solid #c4a36e;
+}
+
+.xmas-bar__inner {
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+
+.xmas-bar__copy {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.85rem;
+  align-items: baseline;
+  font-size: 0.98rem;
+  line-height: 1.35;
+}
+
+.xmas-bar__copy a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.xmas-bar__copy a:hover { color: #e7c27a; }
+
+.xmas-bar__copy strong {
+  font-family: var(--font-brand);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #e7c27a;
+}
+
+.xmas-bar__copy strong::before {
+  content: "❄ ";
+}
+
+.hours-grid .card--sunday {
+  border-color: #1f6b45;
+  background:
+    linear-gradient(180deg, rgba(31, 107, 69, 0.42), rgba(22, 22, 20, 0.15)),
+    #161614;
+}
+
+.snow {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.snow i {
+  position: absolute;
+  top: -8vh;
+  color: #fff;
+  line-height: 1;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.85);
+  animation-name: snow-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+@keyframes snow-fall {
+  0% { transform: translate3d(0, -10vh, 0); }
+  100% { transform: translate3d(var(--snow-x, 20px), 115vh, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .snow { display: none; }
 }

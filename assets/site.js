@@ -8,6 +8,7 @@
     if (/tiktok\.com/i.test(href)) return "tiktok";
     if (/google\.com\/maps|maps\.google|goo\.gl\/maps/i.test(href)) return "maps";
     if (/^mailto:/i.test(href)) return "email";
+    if (/^tel:/i.test(href)) return "phone";
     return "";
   }
 
@@ -78,6 +79,12 @@
     toggle.addEventListener("click", function () {
       var open = nav.classList.toggle("is-open");
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      trackEvent("menu_toggle", {
+        menu_state: open ? "open" : "close",
+        page_path: location.pathname,
+        language: languageCode(),
+        placement: "header"
+      });
     });
   }
 
@@ -88,6 +95,13 @@
         var item = btn.closest(".nav__drop");
         var open = item.classList.toggle("is-open");
         btn.setAttribute("aria-expanded", open ? "true" : "false");
+        trackEvent("nav_dropdown", {
+          menu_state: open ? "open" : "close",
+          link_text: linkLabel(btn),
+          page_path: location.pathname,
+          language: languageCode(),
+          placement: "header"
+        });
       }
     });
   });
@@ -106,8 +120,14 @@
     var img = lightbox.querySelector("img");
     var caption = lightbox.querySelector("[data-lightbox-caption]");
     var close = function () {
+      if (lightbox.hidden) return;
       lightbox.hidden = true;
       document.body.classList.remove("is-locked");
+      trackEvent("gallery_close", {
+        page_path: location.pathname,
+        language: languageCode(),
+        placement: "gallery"
+      });
     };
     document.querySelectorAll("[data-gallery] img").forEach(function (photo) {
       photo.addEventListener("click", function () {
@@ -116,6 +136,12 @@
         if (caption) caption.textContent = photo.alt;
         lightbox.hidden = false;
         document.body.classList.add("is-locked");
+        trackEvent("gallery_open", {
+          link_text: photo.alt || "",
+          page_path: location.pathname,
+          language: languageCode(),
+          placement: "gallery"
+        });
       });
     });
     lightbox.addEventListener("click", function (event) {
@@ -128,6 +154,17 @@
 
   var form = document.querySelector("[data-contact-form]");
   if (form) {
+    var formStarted = false;
+    form.addEventListener("focusin", function () {
+      if (formStarted) return;
+      formStarted = true;
+      trackEvent("form_start", {
+        form_type: "contacto",
+        page_path: location.pathname,
+        language: languageCode(),
+        placement: "contact"
+      });
+    });
     form.addEventListener("submit", function (event) {
       event.preventDefault();
       var data = new FormData(form);
@@ -158,6 +195,7 @@
   }
 
   mountBlackWeek();
+  mountChristmas();
   stampOutboundLinks();
 
   document.addEventListener("click", function (event) {
@@ -165,13 +203,18 @@
     if (!link) return;
     stampLink(link);
     var href = link.getAttribute("href") || "";
-    if (!href || href.charAt(0) === "#") {
-      if (!/^#(reservar|tiendas)\b/i.test(href)) return;
-    }
+    if (!href || href === "#" || /^javascript:/i.test(href)) return;
     var label = linkLabel(link);
     var channel = link.dataset.gaChannel || channelOf(href);
     var reservar = isReserveCta(href, label);
-    if (!channel && !reservar) return;
+    if (!channel && !reservar) {
+      trackInternalClick(link, href, label);
+      return;
+    }
+    if (href.charAt(0) === "#" && !/^#(reservar|tiendas)\b/i.test(href)) {
+      trackInternalClick(link, href, label);
+      return;
+    }
 
     var params = trackingParams(link, href, label, channel);
     trackEvent("click_outbound", params);
@@ -195,6 +238,7 @@
     if (channel === "tiktok") trackEvent("click_tiktok", params);
     if (channel === "maps") trackEvent("click_maps", params);
     if (channel === "email") trackEvent("click_email", params);
+    if (channel === "phone") trackEvent("click_phone", params);
     if (params.utm_campaign === "black_friday") {
       trackEvent("click_black_friday", params);
       if (params.shop === "el_carmen") trackEvent("click_black_friday_el_carmen", params);
@@ -215,6 +259,26 @@
       });
     }
   });
+
+  function trackInternalClick(link, href, label) {
+    var params = trackingParams(link, href, label, "page");
+    trackEvent("click_internal", params);
+    if (link.closest(".lang")) {
+      trackEvent("click_language", {
+        link_text: label,
+        language_to: (link.getAttribute("hreflang") || "").slice(0, 2),
+        page_path: location.pathname,
+        language: languageCode(),
+        placement: "language"
+      });
+    }
+    if (/\/blog\//i.test(href) || (/\/blog\//i.test(location.pathname) && /^\.\//.test(href))) trackEvent("click_blog", params);
+    if (/el-carmen\.html/i.test(href)) trackEvent("click_shop_el_carmen", params);
+    if (/la-petxina\.html/i.test(href)) trackEvent("click_shop_la_petxina", params);
+    if (/servicios\.html|services\.html/i.test(href)) trackEvent("click_services", params);
+    if (/contacto\.html|contact\.html/i.test(href)) trackEvent("click_contact", params);
+    if (/^#horario\b/i.test(href)) trackEvent("click_hours", params);
+  }
 
   function stampOutboundLinks() {
     document.querySelectorAll("a[href]").forEach(stampLink);
@@ -314,6 +378,9 @@
 
   function placementOf(link) {
     if (link.classList.contains("wa")) return "floating";
+    if (link.closest(".xmas-bar")) return "banner";
+    if (link.closest(".lang")) return "language";
+    if (link.closest(".blog-card, .blog-post")) return "blog";
     if (link.closest(".nav, header")) return "header";
     if (link.closest("footer, .footer")) return "footer";
     if (link.closest(".bf-modal")) return "modal";
@@ -423,13 +490,82 @@
   }
 
   function blackWeekOpen() {
+    return false;
+  }
+
+  function mountChristmas() {
+    if (!christmasOpen()) return;
+    document.body.classList.add("is-christmas");
+    var lang = languageCode();
+    var copy = christmasCopy();
+    var t = copy[lang] || copy.es;
+    var bar = document.createElement("div");
+    bar.className = "xmas-bar";
+    bar.innerHTML =
+      '<div class="xmas-bar__inner container">' +
+        '<p class="xmas-bar__copy"><strong>' + t.kicker + '</strong><a href="' + christmasPostHref() + '">' + t.text + '</a></p>' +
+      '</div>';
+    document.body.insertBefore(bar, document.body.firstChild);
+    function fitBar() {
+      document.body.style.setProperty("--xmas-h", bar.offsetHeight + "px");
+    }
+    fitBar();
+    window.addEventListener("resize", fitBar);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var snow = document.createElement("div");
+    snow.className = "snow";
+    snow.setAttribute("aria-hidden", "true");
+    var flakes = ["❄", "❅", "❆"];
+    var html = "";
+    for (var i = 0; i < 42; i++) {
+      var size = (7 + Math.random() * 11).toFixed(1);
+      var left = (Math.random() * 100).toFixed(2);
+      var duration = (10 + Math.random() * 14).toFixed(2);
+      var delay = (-Math.random() * 18).toFixed(2);
+      var drift = ((Math.random() * 70) - 35).toFixed(0);
+      var opacity = (0.55 + Math.random() * 0.4).toFixed(2);
+      html += '<i style="left:' + left + '%;font-size:' + size + 'px;animation-duration:' + duration + 's;animation-delay:' + delay + 's;opacity:' + opacity + ';--snow-x:' + drift + 'px">' + flakes[i % 3] + '</i>';
+    }
+    snow.innerHTML = html;
+    document.body.appendChild(snow);
+  }
+
+  function christmasPostHref() {
+    var lang = languageCode();
+    var file = lang === "en"
+      ? "christmas-sunday-la-petxina-open.html"
+      : lang === "ru"
+        ? "rozhdestvenskoe-voskresene-la-petxina-otkryta.html"
+        : "domingo-navidad-la-petxina-abierta.html";
+    if (/\/blog\//i.test(location.pathname)) return "./" + file;
+    return "./blog/" + file;
+  }
+
+  function christmasOpen() {
     var day;
     try {
       day = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Madrid", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
     } catch (error) {
       day = new Date().toISOString().slice(0, 10);
     }
-    return day <= "2026-11-29";
+    return day >= "2026-11-26" && day <= "2027-01-06";
+  }
+
+  function christmasCopy() {
+    return {
+      es: {
+        kicker: "Navidad",
+        text: "En diciembre, solo La Petxina abre los domingos de 10:00 a 14:00. Domingo de Navidad: 27 de diciembre."
+      },
+      en: {
+        kicker: "Christmas",
+        text: "In December, only La Petxina is open on Sundays, 10:00–14:00. Christmas Sunday: 27 December."
+      },
+      ru: {
+        kicker: "Рождество",
+        text: "В декабре по воскресеньям открыта только La Petxina, с 10:00 до 14:00. Рождественское воскресенье: 27 декабря."
+      }
+    };
   }
 
   function restoreBlackWeekCopy() {
